@@ -1,8 +1,6 @@
 import React from "react";
 import Let from "./Let";
 import SkillItem from "./SkillItem";
-import Html from "./img/html.png";
-import { logDOM } from "@testing-library/react";
 import skills from "./skills";
 
 function SkillsContainer() {

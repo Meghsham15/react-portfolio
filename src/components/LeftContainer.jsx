@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import slackImg from "./img/slack.png";
-import facebookImg from "./img/facebook.png";
-import discordImg from "./img/discord.png";
-import twitterImg from "./img/twitter.png";
-import mjLogo from "./img/mjlogo.png";
+import Images from "./Images";
 
 function LeftContainer() {
     const [degree, setDegree] = useState("");
@@ -69,32 +65,32 @@ function LeftContainer() {
     return (
         <div className="leftContainer">
             <div className="logo">
-                <a href="/react-portfolio/"><img src={mjLogo} alt="" /></a>
+                <a href="/react-portfolio/"><img src={Images.mjLogo} alt="" /></a>
             </div>
             <div id="socials">
                 <h3>Socials -</h3>
                 <div id="instagram" onMouseLeave={(e) => handelMouseLeave("instagram")} onMouseEnter={(e) => handelMouseEnter("instagram")} className="social">
                     <a
                         href="https://join.slack.com/t/newworkspace-nig2346/shared_invite/zt-1lp9ax1n4-~Zecyj0U~tnztIMsmsK6uA" target="_blank">
-                        <img src={slackImg} alt="" />
+                        <img src={Images.slackImg} alt="" />
                         <p>@Meghsham Jade (MJ)</p>
                     </a>
                 </div>
                 <div id="faceBook" onMouseLeave={(e) => handelMouseLeave("faceBook")} onMouseEnter={(e) => handelMouseEnter("faceBook")} className="social fb">
                     <a href="https://www.facebook.com/meghsham.jade/" target="_blank">
-                        <img src={facebookImg} alt="" />
+                        <img src={Images.facebookImg} alt="" />
                         <p>Meghsham Jade</p>
                     </a>
                 </div>
                 <div id="discord" onMouseLeave={(e) => handelMouseLeave("discord")} onMouseEnter={(e) => handelMouseEnter("discord")} className="social discord">
                     <a href="https://discord.gg/mFYaPHj6" target="_blank">
-                        <img src={discordImg} alt="" />
+                        <img src={Images.discordImg} alt="" />
                         <p>ÆRÉS#9264</p>
                     </a>
                 </div>
                 <div id="twitter" onMouseLeave={(e) => handelMouseLeave("twitter")} onMouseEnter={(e) => handelMouseEnter("twitter")} className="social twt" >
                     <a href="https://twitter.com/Meghsham6" target="_blank">
-                        <img src={twitterImg} alt="" />
+                        <img src={Images.twitterImg} alt="" />
                         <p>@Meghsham6</p>
                     </a>
                 </div>

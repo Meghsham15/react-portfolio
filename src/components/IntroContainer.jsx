@@ -1,5 +1,5 @@
 import React from "react";
-import MJ from "./img/mj.jpg";
+import Images from "./Images"
 import Let from "./Let";
 
 function IntroContainer() {
@@ -53,7 +53,7 @@ function IntroContainer() {
                     </div>
                 </div>
                 <div  class="img">
-                    <img src={MJ} alt="MJ" />
+                    <img src={Images.mj} alt="MJ" />
                 </div>
             </div>
         </div>

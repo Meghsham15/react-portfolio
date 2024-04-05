@@ -2,9 +2,8 @@ import React from "react";
 import projects from "./projects";
 import Let from "./Let";
 import ProjectItem from "./ProjectItem";
-import leftB from "./img/leftB.png";
-import rightB from "./img/rightB.png";
 import Carosel from "./Carosel";
+import Images from "./Images";
 
 function ProjectsContainer() {
     let myProjects = "My-Projects".split("");
@@ -47,8 +46,8 @@ function ProjectsContainer() {
 
                 </h1>
                 <div className="buttons">
-                    <button id="lB"><img className="proButtons" onClick={handleClickLeft} src={leftB} alt="" id="left" /></button>
-                    <button id="rB"><img className="proButtons" onClick={handleClickRight} src={rightB} alt="" id="right" /></button>
+                    <button id="lB"><img className="proButtons" onClick={handleClickLeft} src={Images.leftB} alt="" id="left" /></button>
+                    <button id="rB"><img className="proButtons" onClick={handleClickRight} src={Images.rightB} alt="" id="right" /></button>
                 </div>
                 <div className="projectBox">
                     <div id="projectSlide" className="projectSlide">
