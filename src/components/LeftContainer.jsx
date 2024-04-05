@@ -69,7 +69,7 @@ function LeftContainer() {
     return (
         <div className="leftContainer">
             <div className="logo">
-                <a href="/portfolio-mj/"><img src={mjLogo} alt="" /></a>
+                <a href="/react-portfolio/"><img src={mjLogo} alt="" /></a>
             </div>
             <div id="socials">
                 <h3>Socials -</h3>
