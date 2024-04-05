@@ -1,0 +1,204 @@
+footer {
+    width: 2vw;
+    height: 10vw;
+    position: sticky;
+    left: 80vw;
+    top: 75vh;
+    /* right: 14vw; */
+}
+.dateTime {
+    height: 11%;
+    display: flex;
+    margin: auto;
+    margin: 2vw auto;
+    width: 95%;
+    flex-direction: column;
+    /* border: 2px solid; */
+}
+
+.commentsLog {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 65%;
+    padding: 1vw;
+    align-items: center;
+    overflow: hidden;
+    overflow-y: scroll;
+    /* background: #000000; */
+    box-shadow: inset 1px 1px 14px 2px #ff0404;
+}
+.comments::-webkit-scrollbar{
+    width: 3px;
+}
+.comments::-webkit-scrollbar-track {
+    background: #02788b; 
+}
+   
+  /* Handle */
+.comments::-webkit-scrollbar-thumb {
+    background: #9f0606; 
+}
+  
+  /* Handle on hover */
+.comments::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+.comments h4 {
+    font-size: 1.3vw;
+    margin: 1vw auto;
+    /* font-family: 'Josefin Sans', sans-serif; */
+    font-weight: bolder;
+    text-decoration: underline;
+    letter-spacing: 0.1vw;
+    transition: all 0.3s ease-in-out;
+}
+.comments h4:hover{
+    
+    transform: scale(1.2);
+    /* background: radial-gradient(black, transparent); */
+    color: #02bdcc;
+}
+.comments form {
+    width: 100%;
+    /* margin: 1vw 0vw; */
+    height: 20%;
+    margin-bottom: 1.5vw;
+}
+.comments form input, textarea {
+    margin: 0.2vw auto;
+    width: 100%;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bolder;
+    color: red;
+}
+.comments form input:focus,.comments form textarea:focus {
+   border: none;
+   outline-style: none;
+   color: red;
+   padding: 0.3vw;
+}
+#buttons {
+    display: flex;
+    margin: 0.3vw auto;
+    justify-content: space-evenly;
+}
+#buttons button {
+    font-size: 1vw;
+    cursor: pointer;
+    color: black;
+    border-radius: 5px;
+    width: 40%;
+    font-weight: bolder;
+    background: #008cb5;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+#buttons button:hover{
+    transform: scale(1.1);
+    box-shadow: 1px 1px 4px 0px #f41515, -1px -1px 4px 0px #f41515;
+    color: aliceblue;
+    background: black;
+}
+.comments hr{
+    color: aliceblue;
+    width: 100%;
+    margin-top: -12px;
+}
+.post {
+    margin: 1vw auto;
+    padding: 5px;
+    width: 90%;
+    display: flex;
+    /* height: 15%; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-weight: bolder;
+    margin-bottom: 1vw;
+}
+.postTable {
+    /* box-shadow: inset 1px 1px 8px 2px; */
+    width: 100%;
+    margin: 0.2vw 0vw;
+    color: aliceblue;
+    text-align: center;
+    position: relative;
+    /* height: 9%; */
+}
+.postTable p{
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 100;
+    font-size: 1.1vw;
+    text-align: initial;
+    margin-bottom: 0.5vw;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+.postTable p:hover{
+    text-shadow: 2px 1px 1px #009ab3;
+}
+.name {
+    position: relative;
+    right: 0vw;
+    font-size: 1vw;
+    /* width: 9vw; */
+    letter-spacing: 0.1vw;
+    color: #ff98ff;
+}
+#cmt{
+    margin: 1vw auto;
+    display: flex;
+    text-align: center;
+    letter-spacing: 0.1vw;
+    color: #0082a3;
+    font-family: 'Josefin Sans', sans-serif;
+    margin-bottom: 0px;
+}
+#cmt h3{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1vw;
+    transition: all 0.3s ease-in-out;
+}
+#cmt h3:hover{
+    color: aliceblue;
+}
+#logout {
+    width: 45%;
+    height: 5%;
+    position: absolute;
+    right: 0vw;
+    margin: 1vw 1vw;
+    transition: all 0.3s ease-in-out;
+}
+#logout:hover{
+    box-shadow: 1px 1px 4px 1px #0082a3, -1px -1px 4px 1px #0082a3;
+    transform: scale(1.1);
+    border-radius: 0.3vw;
+}
+#logout a{
+    width: 100%;
+    height: 100%;
+    background: red;
+    color: black;
+    font-weight: bolder;
+}
+.logout {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background: red;
+    justify-content: center;
+    font-weight: bolder;
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+    border-radius: 0.3vw;
+    align-items: center;
+}
+
+.logout:hover{
+    background: black;
+    color: #f51515;
+    cursor: pointer;
+}

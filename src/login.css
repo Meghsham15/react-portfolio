@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe&family=Josefin+Sans&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+h1 {
+    font-size: 3vw;
+    text-shadow: 1px 4px 4px red;
+}
+/* body{
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+    background: black;
+} */
+
+.loginContainer {
+    animation: reveal 1s ease-in-out;
+    background: black;
+    justify-content: center;
+    width: 40%;
+    margin: 6vw 0vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 1px 1px 10px 2px #ff0000;
+    padding: 1.5vw;
+}
+.loginContainer form {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+}
+.loginContainer form input, input {
+    font-family: 'Josefin Sans', sans-serif;
+    height: 2vw;
+    margin: 1vw auto;
+    padding: 1vw;
+    width: 80%;
+    color: white;
+    background: black;
+    border-radius: 0.5vw;
+    border: none;
+    outline-style: none;
+    border-bottom: 2px solid red;
+    font-size: 1.5vw;
+    font-weight: bold;
+}
+.focus:focus {
+    border: none;
+    border-bottom: 2px solid rgb(3 118 129);
+    border-right: 2px solid rgb(3 118 129);
+    outline-style: none;
+}
+.loginContainer form button {
+    font-size: 1.5vw;
+    font-weight: bold;
+    width: 15vw;
+    color:black;
+    margin: 2vw auto;
+    cursor: pointer;
+    border-radius: 0.7vw;
+    height: 2.5vw;
+    transition: all 0.5s ease-in-out;
+    box-shadow: 1px 1px 8px 0px red;
+}
+.loginContainer form button:hover {
+    transform: scale(1.1);
+    box-shadow: 1px 1px 4px 0px;
+    box-shadow: 1px 1px 8px 0px #026c70 ;
+    filter: invert(1);
+}
+.ask{
+    display: flex;
+    justify-content: space-evenly;
+    width: 65%;
+    font-size: 1.6vw;
+}
+.ask a{
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid;
+    width: 30%;
+    text-align: center;
+    padding: 0.4vw;
+    border-radius: 0.5vw;
+    border: 1px solid;
+    color: #048f9d;
+    transition: all 0.3s ease-in-out;
+}
+.ask a:hover{
+    transform: scale(1.1);
+    box-shadow: 1px 1px 6px 0px;
+    color: red;
+    cursor: pointer;
+}
+.auth {
+    width: 75%;
+    padding: 1vw;
+    /* border: 2px solid; */
+    height: 30%;
+    box-shadow: 1px 1px 15px 1px #940000;
+    margin: 3vw 0vw;
+}
+.auth a {
+    width: 90%;
+    height: 36%;
+    margin: 0.3vw auto;
+    transition: all 0.5s ease-in-out;
+}
+.auth a:hover{
+    transform: scale(1.1);
+}
