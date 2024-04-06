@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 function Login() {
     function handleClick(e) {
         e.preventDefault();
-        document.querySelector("#proPop"+104).classList.remove("display");
+        document.querySelector("#proPop"+105).classList.remove("display");
         
     }
 
@@ -23,7 +23,7 @@ function Login() {
     
     return (
         <div class="login">
-            <h3>Login to see comments </h3>
+            <h3>Leave a review - </h3>
             <div class="btn">
                 <form>
                     <marquee behavior="" direction="right">→</marquee><button onClick={handleClick} id="login" class="104">login</button>
