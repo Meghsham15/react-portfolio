@@ -837,7 +837,7 @@ footer ul {
     /* height: 400px; */
     z-index: 1;
     /* margin: 0vw 50px; */
-    padding: 0vw 50px;
+    padding: 0vw 10px;
     cursor: pointer;
 }
 
