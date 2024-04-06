@@ -1274,9 +1274,10 @@ textarea {
 }
 
 .logout:hover {
-    background: black;
+    background: transparent;
     color: #f51515;
     cursor: pointer;
+    border: 1.5px solid #f51515;
 }
 
 .proPop {

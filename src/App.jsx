@@ -20,7 +20,7 @@ function App() {
     let interval = setTimeout(function () {
       setHidden(true);
       clearInterval(interval);
-    }, 2000);
+    }, 1900);
   }, []);
   // useEffect(() => {
   //   let interval = setTimeout(function () {
