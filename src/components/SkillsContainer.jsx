@@ -19,7 +19,7 @@ function SkillsContainer() {
 
                 <div id="skillDiv">
                     {skills.map((e,index)=>{
-                        return<SkillItem key={e.id} name={e.name} img={e.img} id={e.id} />
+                        return<SkillItem key={e.id} name={e.name} percent={e.percent} img={e.img} id={e.id} />
                         {/* console.log(e.name); */}
                     })}
 

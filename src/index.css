@@ -6,6 +6,10 @@
     font-family: 'Alumni Sans Pinstripe', sans-serif;
 }
 
+.toolTip{
+    color: red;
+}
+
 .image-container {
     backdrop-filter: blur(10px);
     background-color: #000000a1;
@@ -468,8 +472,8 @@ footer ul {
 }
 
 .des:hover {
-    background: rgb(255 255 255 / 80%);
-    color: black;
+    /* background: rgb(255 255 255 / 80%); */
+    color: white;
     transform: scale(1.1);
     border-radius: 10%;
 }

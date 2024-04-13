@@ -1,10 +1,10 @@
 // import logo from './logo.svg';
 import { useEffect, useState } from "react";
-import Container from "./components/Container";
-import Loader from "./components/Loader";
-import RegLogin from "./components/RegLogin";
-import ResumeContainer from "./components/ResumeContainer";
-import Auth from "./components/Auth";
+import Container from "./Container";
+import Loader from "./Loader";
+import RegLogin from "./RegLogin";
+import ResumeContainer from "./ResumeContainer";
+import Auth from "./Auth";
 
 function App() {
   const [isHidden, setHidden] = useState(false);
@@ -12,7 +12,7 @@ function App() {
   const [comments, setComments] = useState();
   const [userObj, setUserObj] = useState();
   let authUser = new Auth();
-
+  
   useEffect(() => {
     if(window.innerWidth<630){
       alert('Use laptop or desktop for better experience')

@@ -4,8 +4,24 @@ import Let from "./Let";
 import ProjectItem from "./ProjectItem";
 import Carosel from "./Carosel";
 import Images from "./Images";
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles } from '@material-ui/core/styles';
 
-function ProjectsContainer() {
+const styles = (theme) => ({
+    customTooltip: {
+        backgroundColor: 'black', // Customize background color
+        color: 'red', // Customize text color
+        fontSize: '14px', // Customize font size
+        borderRadius: '8px', // Customize border radius
+        padding: '8px', // Add padding
+        // Add any other custom styles here
+        border: "1px solid #03989e",
+        fontFamily: '"Josefin Sans", sans-serif',
+        boxShadow: "0px 0px 3px 0.5px #03989e",
+    },
+});
+
+function ProjectsContainer(props) {
     let myProjects = "My-Projects".split("");
     let carosel = new Carosel();
 
@@ -46,8 +62,12 @@ function ProjectsContainer() {
 
                 </h1>
                 <div className="buttons">
+                <Tooltip title="Previous" classes={{ tooltip: props.classes.customTooltip }}>
                     <button id="lB"><img className="proButtons" onClick={handleClickLeft} src={Images.leftB} alt="" id="left" /></button>
+                    </Tooltip>
+                    <Tooltip title="Next" classes={{ tooltip: props.classes.customTooltip }}>
                     <button id="rB"><img className="proButtons" onClick={handleClickRight} src={Images.rightB} alt="" id="right" /></button>
+                    </Tooltip>
                 </div>
                 <div className="projectBox">
                     <div id="projectSlide" className="projectSlide">
@@ -65,4 +85,4 @@ function ProjectsContainer() {
 
 
 
-export default ProjectsContainer;
+export default withStyles(styles)(ProjectsContainer);

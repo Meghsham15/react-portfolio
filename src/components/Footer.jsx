@@ -1,15 +1,43 @@
 import React from "react";
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles } from '@material-ui/core/styles';
 
-function Footer(){
-    return(
+const styles = (theme) => ({
+    customTooltip: {
+        backgroundColor: 'black', // Customize background color
+        color: 'red', // Customize text color
+        fontSize: '14px', // Customize font size
+        borderRadius: '8px', // Customize border radius
+        padding: '8px', // Add padding
+        // Add any other custom styles here
+        border: "1px solid #03989e",
+        fontFamily: '"Josefin Sans", sans-serif',
+        boxShadow: "0px 0px 3px 0.5px #03989e",
+    },
+});
+
+function Footer(props) {
+    return (
         <footer>
             <ul>
-                <li title="Intro/Home" class="footer-click" id="f1"><a class="navigator-click" href="#intro">..</a></li>
-                <li title="Skills" class="footer" id="f2"><a class="navigator" href="#skills">..</a></li>
-                <li title="Projects" class="footer" id="f3"><a class="navigator" href="#projects">..</a></li>
+                <li class="footer-click" id="f1">
+                    <Tooltip title="Intro/Home" classes={{ tooltip: props.classes.customTooltip }}>
+                        <a class="navigator-click" href="#intro">..</a>
+                    </Tooltip>
+                </li>
+                <li class="footer" id="f2">
+                    <Tooltip title="My skills" classes={{ tooltip: props.classes.customTooltip }}>
+                        <a class="navigator" href="#skills">..</a>
+                    </Tooltip>
+                </li>
+                <li title="Projects" class="footer" id="f3">
+                    <Tooltip title="My projects" classes={{ tooltip: props.classes.customTooltip }}>
+                        <a class="navigator" href="#projects">..</a>
+                    </Tooltip>
+                </li>
             </ul>
         </footer>
     );
 };
 
-export default Footer;
+export default withStyles(styles)(Footer);

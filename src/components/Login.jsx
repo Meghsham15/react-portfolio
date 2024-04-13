@@ -1,6 +1,22 @@
 import React from "react";
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles } from '@material-ui/core/styles';
 
-function Login() {
+const styles = (theme) => ({
+    customTooltip: {
+        backgroundColor: 'black', // Customize background color
+        color: 'red', // Customize text color
+        fontSize: '14px', // Customize font size
+        borderRadius: '8px', // Customize border radius
+        padding: '8px', // Add padding
+        // Add any other custom styles here
+        border:"1px solid #03989e",
+        fontFamily: '"Josefin Sans", sans-serif',
+        boxShadow:"0px 0px 3px 0.5px #03989e",
+    },
+});
+
+function Login({classes}) {
     function handleClick(e) {
         e.preventDefault();
         document.querySelector("#proPop"+105).classList.remove("display");
@@ -26,7 +42,9 @@ function Login() {
             <h3>Leave a review - </h3>
             <div class="btn">
                 <form>
-                    <marquee behavior="" direction="right">→</marquee><button onClick={handleClick} id="login" class="104">login</button>
+                    <marquee behavior="" direction="right">→</marquee>
+                    <Tooltip title="Login to leave a review" classes={{ tooltip: classes.customTooltip }}><button onClick={handleClick} id="login" class="104">login</button>
+                    </Tooltip>
                     <marquee behavior="" direction="left"> ← </marquee>
                 </form>
             </div>
@@ -34,4 +52,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default withStyles(styles)(Login);

@@ -1,8 +1,26 @@
 import React from "react";
 import Images from "./Images"
 import Let from "./Let";
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles } from '@material-ui/core/styles';
 
-function IntroContainer() {
+const styles = (theme) => ({
+    customTooltip: {
+        backgroundColor: 'black', // Customize background color
+        color: 'red', // Customize text color
+        fontSize: '18px', // Customize font size
+        borderRadius: '8px', // Customize border radius
+        padding: '8px', // Add padding
+        // Add any other custom styles here
+        border: "1px solid #03989e",
+        fontFamily: '"Josefin Sans", sans-serif',
+        boxShadow:"0px 0px 5px 0.5px #03989e",
+        // fontWeight:"bold"
+    },
+});
+
+
+function IntroContainer({ classes }) {
     let fullStack = "Full-Stack".split("");
     let webDeveloper = "Web-Developer".split("");
     let intro = process.env.REACT_APP_Intro;
@@ -27,37 +45,40 @@ function IntroContainer() {
     // }
 
     return (
-        <div id="intro" class="content">
-            <div class="introInner">
-                <div class="msg">
-                    <div class="letters">
+        <div id="intro" className="content">
+            <div className="introInner">
+                <div className="msg">
+                    <div className="letters">
 
                         {fullStack.map((e, index) => (
                             <Let key={index} letter={e} />
                         ))}
                     </div>
-                    <div class="letters2">
+                    <div className="letters2">
                         {webDeveloper.map((e, index) => (
                             <Let key={index} letter={e} />
                         ))}
                     </div>
-                    <div class="hi">
+                    <div className="hi">
                         Hi,
                     </div>
-                    <div class="hi">
+                    <div className="hi">
                         Myself Meghsham Jade
                     </div>
-                    <div class="normal">
+                    <div className="normal">
                         <h4>{intro}
                         </h4>
                     </div>
                 </div>
-                <div  class="img">
+                <div className="img">
+                    <Tooltip title="Meghsham Jade " classes={{ tooltip: classes.customTooltip }}>
+
                     <img src={Images.mj} alt="MJ" />
+                    </Tooltip>
                 </div>
             </div>
         </div>
     )
 }
 
-export default IntroContainer;
+export default withStyles(styles)(IntroContainer);

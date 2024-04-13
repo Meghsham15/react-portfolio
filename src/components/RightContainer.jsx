@@ -19,6 +19,9 @@ function RightContainer(props){
             ap = "am";
             hrs = dt.getHours();
         }
+        if(hrs===0){
+            hrs=12;
+        }
         let mins = dt.getMinutes();
         let secs = dt.getSeconds();
         setTime(hrs + ":" + mins + ":" + secs + " " + ap);

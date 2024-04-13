@@ -1,12 +1,32 @@
 import React, { useEffect, useState } from "react";
 import Images from "./Images";
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles } from '@material-ui/core/styles';
 
-function LeftContainer() {
+const styles = (theme) => ({
+    customTooltip: {
+        backgroundColor: 'black', // Customize background color
+        color: 'red', // Customize text color
+        fontSize: '14px', // Customize font size
+        borderRadius: '8px', // Customize border radius
+        padding: '8px', // Add padding
+        // Add any other custom styles here
+        border:"1px solid #03989e",
+        fontFamily: '"Josefin Sans", sans-serif',
+        boxShadow:"0px 0px 3px 0.5px #03989e",
+    },
+});
+
+function LeftContainer({ classes }) {
     const [degree, setDegree] = useState("");
     const [des, setDes] = useState("");
     const [weatherIcon, setWheatherIcon] = useState("");
+    const [city,setCity] = useState("");
+    
+
 
     function fetchWeather(city) {
+        setCity(city);
         fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=c931035e8ef7ccea5ad27c6b2a8f7f9b')
             .then(response => response.json())
             .then(data => {
@@ -24,6 +44,7 @@ function LeftContainer() {
 
     useEffect(() => {
         fetchWeather("Pune");
+        setCity("Pune");
 
     }, []);
 
@@ -97,11 +118,15 @@ function LeftContainer() {
             </div>
             <div className="weather">
                 <div className="deg">
-                    <p title="You can change the city by clicking on this" onBlur={(e) => handleCityChange(e.target.innerText)} contentEditable="true">Pune</p> : {degree}
+                    <Tooltip title="You can change the city by clicking on this" classes={{ tooltip: classes.customTooltip }}>
+                        <p onBlur={(e) => handleCityChange(e.target.innerText)} contentEditable="true">Pune</p>
+                    </Tooltip> : {degree}
                 </div>
+                <Tooltip title={`The weather in ${city} is ${des}`} classes={{ tooltip: classes.customTooltip }}>
                 <div className="des">
                     {des} <img src={weatherIcon} alt="" />
                 </div>
+                </Tooltip>
             </div>
             <div className="downScrollL">
                 <marquee behavior="" direction="right" className="scroll">scroll---&gt;</marquee>
@@ -111,4 +136,4 @@ function LeftContainer() {
 
 }
 
-export default LeftContainer;
+export default withStyles(styles)(LeftContainer);
