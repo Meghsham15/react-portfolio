@@ -3,10 +3,10 @@ import Images from "./Images";
 const projects = [
     {
         id: 101,
-        link: "https://meghsham15.github.io/hotel/",
-        img:Images.hotel,
-        name: "Hotel Website",
-        des:"Responsive website for advertisement of a hotel situated near a beach",
+        link: "https://bids6-qqaaa-aaaak-ako6q-cai.icp0.io/",
+        img:Images.jsPortfolio,
+        name: "Web3 Portfolio",
+        des:"Portfolio using web3 technology",
     },
     {
         id: 102,
@@ -56,6 +56,13 @@ const projects = [
         img:Images.jsPortfolio,
         name: "JS Portfolio",
         des:"Portfolio using only html, css, js and jquery",
+    },
+    {
+        id: 111,
+        link: "https://meghsham15.github.io/hotel/",
+        img:Images.hotel,
+        name: "Hotel Website",
+        des:"Responsive website for advertisement of a hotel situated near a beach",
     },
 ];
 
