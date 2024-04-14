@@ -8,7 +8,7 @@ const styles = (theme) => ({
     customTooltip: {
         backgroundColor: 'black', // Customize background color
         color: 'red', // Customize text color
-        fontSize: '18px', // Customize font size
+        fontSize: '1.4vw', // Customize font size
         borderRadius: '8px', // Customize border radius
         padding: '8px', // Add padding
         // Add any other custom styles here
