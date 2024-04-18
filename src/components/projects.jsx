@@ -10,11 +10,12 @@ const projects = [
     },
     {
         id: 102,
-        link: "https://meghsham15.github.io/songs-project-/",
-        img:Images.music,
-        name: "Music Website",
-        des:"In this project i have created music website which plays music produced by my friend.",
+        link: "https://wi2cs-syaaa-aaaak-aforq-cai.icp0.io/",
+        img:Images.reactTodo,
+        name: "Secure Notes app",
+        des:"Responsive web3 website where u can store ur sensitive information(ICP login)",
     },
+    
     {
         id: 103,
         link: "https://github.com/Meghsham15/journal-website",
@@ -64,6 +65,14 @@ const projects = [
         name: "Hotel Website",
         des:"Responsive website for advertisement of a hotel situated near a beach",
     },
+    {
+        id: 112,
+        link: "https://meghsham15.github.io/songs-project-/",
+        img:Images.music,
+        name: "Music Website",
+        des:"In this project i have created music website which plays music produced by my friend.",
+    },
+    
 ];
 
 export default projects;
