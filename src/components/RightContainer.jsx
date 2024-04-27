@@ -51,9 +51,9 @@ function RightContainer(props){
                 </div>
             </div>
             <div id="comments" className={props.authStatus?"comments commentsLog":""}>
-                {props.authStatus?<CommentsContianer setLoader={props.setLoader} scrollTop={scrollTop} setComments={props.setComments} authTool={props.authTool} userObj={props.userObj} commentsArr={props.comments}/>:<Login/>}
+                {props.authStatus?<CommentsContianer setLoader={props.setLoader} scrollTop={scrollTop} setComments={props.setComments} commentsArr={props.comments}/>:<Login/>}
             </div>
-            {props.authStatus?<Logout setLoader={props.setLoader} setUserObj={props.setUserObj} authTool={props.authTool} setAuth={props.setAuth} />:<></>}
+            {props.authStatus?<Logout setLoader={props.setLoader} setAuth={props.setAuth} />:<></>}
         </div>
 
     );

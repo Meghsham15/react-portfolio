@@ -1,4 +1,4 @@
-class Auth {
+class AuthUser {
     constructor() {
         this.apiUrl = process.env.REACT_APP_URL;
         // this.action;
@@ -55,12 +55,12 @@ class Auth {
         return true;
     }
 
-    async addChat(username,password,cmt) {
+    async addChat(cmt) {
         if(!this.username){
-            this.username = username;
+            return "error please login"
         }
         if(!this.password){
-            this.password = password;
+            return "error please login"
         }
         let comment = cmt.toLocaleString();
         if (comment === "" || comment === undefined) {
@@ -100,6 +100,10 @@ class Auth {
             return false;
         }
 
+    }
+
+    getUserName(){
+        return this.username;
     }
 
     async login(username,password) {
@@ -154,6 +158,10 @@ class Auth {
 
     getComments() {
         return this.commentsArr;
+    }
+
+    getUserObj(){
+        return {username:this.username,pass:this.password};
     }
 
     async fetchComments() {
@@ -214,5 +222,5 @@ class Auth {
             });
     }
 }
-
+let Auth = new AuthUser();
 export default Auth;

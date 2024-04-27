@@ -11,7 +11,7 @@ function Container(props){
         <div class="container">
         <LeftContainer/>
         <MidContainer />
-        <RightContainer setLoader={props.setLoader} setComments={props.setComments} setUserObj={props.setUserObj} authTool={props.authTool} userObj={props.userObj} comments={props.comments} setAuth={props.setAuth} authStatus={props.isAuth} />
+        <RightContainer setLoader={props.setLoader} setComments={props.setComments} comments={props.comments} setAuth={props.setAuth} authStatus={props.isAuth} />
         <Footer/>
         </div>
 

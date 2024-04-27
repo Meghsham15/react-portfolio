@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import projects from "./projects";
 import Pop from "./Pop";
-
+import Auth from "./Auth";
 
 function RegLogin(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [credentials, setCredentials] = useState();
     const [comments, setComments] = useState([{ comment: "heelllo noice work", username: "mj" }]);
-    let authUser = props.authTool;
+    let authUser = Auth;
 
     async function handleRegistration(e) {
         e.preventDefault();
@@ -18,7 +18,6 @@ function RegLogin(props) {
         // console.log(JSON.stringify(credentials));
         let res = await authUser.register(username, password);
         if (res) {
-            props.setUserObj({ username, password });
             // console.log("Cred - " + JSON.stringify(credentials));
             let comments = await authUser.getComments();
             setComments(comments);
@@ -44,7 +43,6 @@ function RegLogin(props) {
         setPassword("");
         let res = await authUser.login(username, password);
         if(res){
-            props.setUserObj({ username, password });
             // console.log("Cred - " + JSON.stringify(credentials));
             let comments = await authUser.getComments();
             setComments(comments);

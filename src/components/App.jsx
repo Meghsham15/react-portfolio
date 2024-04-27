@@ -4,14 +4,11 @@ import Container from "./Container";
 import Loader from "./Loader";
 import RegLogin from "./RegLogin";
 import ResumeContainer from "./ResumeContainer";
-import Auth from "./Auth";
 
 function App() {
   const [isHidden, setHidden] = useState(false);
   const [isAuth, setAuth] = useState();
   const [comments, setComments] = useState();
-  const [userObj, setUserObj] = useState();
-  let authUser = new Auth();
   
   useEffect(() => {
     if(window.innerWidth<630){
@@ -32,9 +29,9 @@ function App() {
   return (
     <>
       <Loader isHidden={isHidden} />
-      <RegLogin setLoader={setHidden} setUserObj={setUserObj} authTool={authUser} setCommentsArr={setComments} isAuthFun={setAuth} />
+      <RegLogin setLoader={setHidden} setCommentsArr={setComments} isAuthFun={setAuth} />
       <ResumeContainer />
-      <Container setLoader={setHidden} setUserObj={setUserObj} setComments={setComments} userObj={userObj} authTool={authUser} comments={comments} setAuth={setAuth} isAuth={isAuth} />
+      <Container setLoader={setHidden} setComments={setComments} comments={comments} setAuth={setAuth} isAuth={isAuth} />
     </>
   );
 }

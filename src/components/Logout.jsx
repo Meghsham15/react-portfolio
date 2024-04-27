@@ -1,6 +1,7 @@
 import React from "react";
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
+import Auth from "./Auth";
 
 const styles = (theme) => ({
     customTooltip: {
@@ -17,14 +18,13 @@ const styles = (theme) => ({
 });
 
 function Logout(props) {
-    let auth = props.authTool;
+    let auth = Auth;
     async function handleClick() {
         // console.log(":logout clicked");
         props.setLoader(false);
         let res = await auth.logout();
         if (res) {
             props.setAuth(false);
-            props.setUserObj();
         } else {
             alert("error occured");
         }

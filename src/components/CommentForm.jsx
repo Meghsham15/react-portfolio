@@ -1,19 +1,19 @@
 // import { isDisabled } from "@testing-library/user-event/dist/utils";
 import React, { useState } from "react";
+import Auth from "./Auth";
 
 function CommentForm(props) {
     const [commentInput,setCommentInput] = useState("");
     const [commentText,setCommentText] = useState("Comment");
     const [isDisabled,setDisabled] = useState(false);
-    let auth = props.authTool;
-    let userObj = props.userObj;
+    let auth = Auth;
 
     async function handleClick(e){
         // props.setLoader(false);
         setCommentText("loading...");
         setDisabled(true);
         e.preventDefault();
-        let res = await auth.addChat(userObj.username,userObj.password,commentInput);
+        let res = await auth.addChat(commentInput);
         // console.log(res);
         if(res){
             // alert("succes! added a chat");
