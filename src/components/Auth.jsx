@@ -192,12 +192,17 @@ class AuthUser {
         return await fetch(this.apiUrl)
             .then(this.handleErrors)
             .then(data => {
-                this.display(JSON.stringify(data));
-                // console.log('GET Request Successful:', data);
+                // this.display(JSON.stringify(data));
+                this.images = data.images;
+                console.log('GET Request Successful:', data);
             })
             .catch(error => {
                 console.error('GET Request Failed:', error);
             });
+    }
+
+    getImages(){
+        return this.images;
     }
 
     async makePostRequest(postData) {
@@ -222,5 +227,6 @@ class AuthUser {
             });
     }
 }
+
 let Auth = new AuthUser();
 export default Auth;

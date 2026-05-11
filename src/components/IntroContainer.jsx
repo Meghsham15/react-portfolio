@@ -1,5 +1,5 @@
 import React from "react";
-import Images from "./Images"
+import Images from "./Images";
 import Let from "./Let";
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';

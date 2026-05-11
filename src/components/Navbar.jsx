@@ -41,11 +41,11 @@ function Navbar({ classes }) {
                         src={Images.lindkdenImage} alt="img not found" /></a></li>
                 </Tooltip>
                 <Tooltip title="Mail me" classes={{ tooltip: classes.customTooltip }}>
-                    <li><a href="mailto:meghshamjade50@gmail.com?subject=Hii"><img src={Images.gmailImage}
+                    <li><a href="mailto:meghshamjade.contact@gmail.com?subject=Hii"><img src={Images.gmailImage}
                         alt="img not found" /></a></li>
                 </Tooltip>
                 <Tooltip title="My Resume" classes={{ tooltip: classes.customTooltip }}>
-                    <li><a><img onClick={handleResumeClick} id="resume" src={Images.resumecover} alt="img not found" /></a></li>
+                    <li><a href="https://docs.google.com/document/d/1OBncUErdJSoyGLpi-k-0GyqTz0C4hc8o2_nXcAk_k1g/edit?usp=sharing" target="_blank"><img  id="resume" src={Images.resumecover} alt="img not found" /></a></li>
                 </Tooltip>
             </ul>
         </div>
