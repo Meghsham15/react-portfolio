@@ -143,7 +143,9 @@
 }
 
 .introWeatherLine,
-.skillsExtras {
+.skillsExtras,
+.skillMeaning,
+.skillMeaningHint {
     display: none;
 }
 
@@ -1486,7 +1488,7 @@ footer ul {
 
 .chatBubble span {
     display: block;
-    font-size: clamp(9px, 0.7vw, 11px);
+    font-size: clamp(11px, 0.8vw, 13px);
     color: #2ca6b1;
     font-family: "Josefin Sans", sans-serif;
     font-weight: bolder;
@@ -1495,11 +1497,11 @@ footer ul {
 
 .chatBubble p {
     margin: 0;
-    font-size: clamp(10px, 0.82vw, 13px);
-    color: aliceblue;
+    font-size: clamp(14px, 1.05vw, 16px);
+    color: #f4f7f8;
     font-family: "Josefin Sans", sans-serif;
     font-weight: 400;
-    line-height: 1.35;
+    line-height: 1.5;
     word-break: break-word;
 }
 
@@ -1530,7 +1532,7 @@ footer ul {
     border-radius: 0.25vw;
     background: transparent;
     color: #2ca6b1;
-    font-size: clamp(8px, 0.65vw, 11px);
+    font-size: clamp(11px, 0.75vw, 13px);
     font-family: "Josefin Sans", sans-serif;
     cursor: pointer;
     line-height: 1.2;
@@ -2088,17 +2090,17 @@ footer ul {
     }
 
     .navbar ul li {
-        width: 26px;
-        height: 26px;
-        margin: 0 3px;
+        width: 36px;
+        height: 36px;
+        margin: 0 5px;
         flex-shrink: 0;
-        overflow: hidden;
+        overflow: visible;
     }
 
     .navbarChatItem {
-        width: 32px;
-        height: 32px;
-        margin: 0 2px 0 6px;
+        width: 40px;
+        height: 40px;
+        margin: 0 2px 0 8px;
         overflow: visible;
     }
 
@@ -2106,10 +2108,10 @@ footer ul {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 32px;
-        height: 32px;
+        width: 40px;
+        height: 40px;
         margin: 0;
-        padding: 6px;
+        padding: 8px;
         border: 1px solid #03989e;
         border-radius: 50%;
         background: #000;
@@ -2119,8 +2121,8 @@ footer ul {
     }
 
     .navbarChat img {
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
         filter: none;
         opacity: 1;
     }
@@ -2208,14 +2210,22 @@ footer ul {
     }
 
     .hi {
-        font-size: clamp(18px, 5.5vw, 28px);
+        font-size: clamp(22px, 6.4vw, 32px);
         width: 100%;
+        line-height: 1.35;
     }
 
     .normal {
-        font-size: clamp(13px, 3.6vw, 16px);
+        font-size: clamp(16px, 4.4vw, 18px);
         letter-spacing: 0.02em;
         word-spacing: normal;
+        line-height: 1.55;
+        color: #d5d5d5;
+    }
+
+    .normal h4 {
+        font-weight: 400;
+        line-height: 1.55;
     }
 
     #skills {
@@ -2286,69 +2296,210 @@ footer ul {
         display: none;
     }
 
+    #socials.skillsExtras .social-open {
+        outline: 1px solid #03989e;
+        border-radius: 10px;
+        box-shadow: 0 0 8px rgba(3, 152, 158, 0.45);
+    }
+
+    #socials.skillsExtras .skillMeaningHint,
+    #socials.skillsExtras .skillMeaning {
+        display: block;
+        flex: 0 0 100%;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 8px 0 0;
+        padding: 12px 14px;
+        font-family: "Josefin Sans", sans-serif;
+        font-size: 15px;
+        line-height: 1.5;
+        text-align: left;
+        color: #e8e8e8;
+        border: 1px solid #03989e;
+        border-radius: 10px;
+        background: #041b1d;
+    }
+
+    #socials.skillsExtras .skillMeaningHint {
+        color: #8eb8bc;
+        text-align: center;
+        font-size: 14px;
+        border-style: dashed;
+        background: transparent;
+    }
+
+    #socials.skillsExtras .skillMeaning strong {
+        display: block;
+        margin-bottom: 6px;
+        color: #2ca6b1;
+        font-size: 16px;
+    }
+
+    #socials.skillsExtras .skillMeaning p {
+        display: block;
+        margin: 0;
+        color: #f0f0f0;
+        white-space: normal;
+        font-size: 15px;
+        line-height: 1.55;
+    }
+
     #projects.content {
         box-sizing: border-box;
-        height: 100vh;
-        min-height: 100vh;
-        padding-top: 52px;
-        overflow: hidden;
+        height: auto;
+        min-height: calc(100dvh - 64px);
+        padding: 52px 0 100px;
+        overflow: visible;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .projectsInner {
+        --card-w: min(62vw, 270px);
+        --card-h: min(84vw, 360px);
         margin-top: 0;
-        height: 100%;
+        width: 100%;
+        height: auto;
+        min-height: 0;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 44px;
+        box-sizing: border-box;
     }
 
     .projectsInner h1 {
         font-size: clamp(28px, 8vw, 44px);
-        margin: 12px 0 0;
+        margin: 0 0 18px;
         margin-right: 0;
+        position: relative;
+        z-index: 1;
     }
 
     .buttons {
         display: flex;
-        top: 42%;
-        margin: 0 auto;
-        width: 94%;
-        z-index: 2;
+        position: absolute;
+        top: 58px;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        z-index: 4;
+        pointer-events: none;
+        transform: none;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 4px;
+        box-sizing: border-box;
+    }
+
+    .buttons button {
+        pointer-events: auto;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
     }
 
     #left,
     #right {
-        width: 42px;
+        width: 28px;
     }
 
     .projectBox {
-        width: 78%;
-        height: 58%;
+        width: var(--card-w);
+        height: var(--card-h);
         margin: 0 auto;
-        margin-left: 11%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        transform: none;
+        scrollbar-width: none;
+    }
+
+    .projectBox::-webkit-scrollbar {
+        display: none;
+        height: 0;
     }
 
     .projectSlide {
         height: 100%;
-        position: absolute;
+        width: max-content;
+        position: relative;
         top: 0;
         margin: 0;
+        display: flex;
+        flex-wrap: nowrap;
     }
 
     .projectContent {
-        width: 78vw;
-        height: 100%;
-        padding: 0 8px;
+        flex: 0 0 var(--card-w);
+        width: var(--card-w);
+        max-width: var(--card-w);
+        height: var(--card-h);
+        padding: 8px;
         margin: 0;
+        box-sizing: border-box;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
     }
 
     .proInner {
         position: relative;
+        left: auto;
+        top: auto;
         width: 100%;
-        height: 92%;
-        margin-top: 8px;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        background: #000;
+        border-radius: 10px;
+    }
+
+    .proInner:hover {
+        transform: none;
+        background: #000;
+    }
+
+    .proImg {
+        width: 100%;
+        height: auto;
+        flex: 1 1 auto;
+        min-height: 0;
+        padding: 8px 8px 0;
+        box-sizing: border-box;
+    }
+
+    .proImg img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center top;
+    }
+
+    .proInfo {
+        flex: 0 0 auto;
+        width: 100%;
+        height: auto;
+        min-height: 52px;
+        padding: 8px 10px 12px;
+        box-sizing: border-box;
     }
 
     .proInfo h2 {
-        font-size: clamp(16px, 5vw, 22px);
+        font-size: clamp(15px, 4.4vw, 18px);
+        text-align: center;
+        line-height: 1.25;
     }
 
     .rightContainer {
@@ -2460,6 +2611,26 @@ footer ul {
         gap: 10px;
     }
 
+    .rightContainer.chat-open .chatBubble {
+        max-width: 92%;
+        padding: 10px 12px;
+    }
+
+    .rightContainer.chat-open .chatBubble p {
+        font-size: 15px;
+        line-height: 1.55;
+        color: #f4f7f8;
+    }
+
+    .rightContainer.chat-open .chatBubble span {
+        font-size: 12px;
+    }
+
+    .rightContainer.chat-open .chatActionBtn {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
     .rightContainer.chat-open .chatbot .chatInput,
     .rightContainer.chat-open .chatbot textarea.chatInput {
         flex: 1 1 auto;
@@ -2467,7 +2638,7 @@ footer ul {
         min-width: 0;
         min-height: 44px;
         max-height: 88px;
-        font-size: 14px;
+        font-size: 15px;
         resize: none;
     }
 
@@ -2630,16 +2801,16 @@ footer ul {
     }
 
     .navbar ul li {
-        width: 24px;
-        height: 24px;
-        margin: 0 2px;
-        overflow: hidden;
+        width: 34px;
+        height: 34px;
+        margin: 0 4px;
+        overflow: visible;
     }
 
     .navbarChatItem,
     .navbarChat {
-        width: 30px;
-        height: 30px;
+        width: 38px;
+        height: 38px;
     }
 
     .loginContainer {

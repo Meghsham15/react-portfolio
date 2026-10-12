@@ -19,64 +19,52 @@ class Carosel {
         return idArr;
     }
 
-    right() {
+    scrollTo(id) {
+        this.id = id;
+        const el = document.getElementById(String(id));
+        const box = document.querySelector(".projectBox");
+        if (!el || !box) {
+            return;
+        }
+        const left = el.getBoundingClientRect().left - box.getBoundingClientRect().left + box.scrollLeft;
+        box.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+    }
 
+    right() {
         if (this.id === 101) {
-            let pos = 1;
-            // console.log(pos + ' ' + this.projIds[pos]);
-            window.location.href = '#' + this.projIds[pos];
-            this.id = this.projIds[pos];
+            this.scrollTo(this.projIds[1]);
             return;
         }
         if (this.id === this.projIds[this.length]) {
-            let pos = 0;
-            // console.log(pos + ' ' + this.projIds[pos]);
-            window.location.href = '#' + this.projIds[pos];
-            this.id = this.projIds[pos];
+            this.scrollTo(this.projIds[0]);
             return;
         }
 
         for (let i = 0; i <= this.length; i++) {
             if (this.id === this.projIds[i]) {
-                let pos = i + 1;
-                // console.log(pos + ' ' + this.projIds[pos]);
-                window.location.href = '#' + this.projIds[pos];
-                this.id = this.projIds[pos];
+                this.scrollTo(this.projIds[i + 1]);
                 return;
             }
         }
-
     }
 
     left() {
         if (this.id === 101) {
-            let pos = this.length;
-            // console.log(pos + ' ' + this.projIds[pos]);
-            window.location.href = '#' + this.projIds[pos];
-            this.id = this.projIds[pos];
+            this.scrollTo(this.projIds[this.length]);
             return;
         }
         if (this.id === this.projIds[this.length]) {
-            let pos = this.length - 1;
-            // console.log(pos + ' ' + this.projIds[pos]);
-            window.location.href = '#' + this.projIds[pos];
-            this.id = this.projIds[pos];
+            this.scrollTo(this.projIds[this.length - 1]);
             return;
         }
 
         for (let i = 0; i <= this.length; i++) {
             if (this.id === this.projIds[i]) {
-                let pos = i - 1;
-                // console.log(pos + ' ' + this.projIds[pos]);
-                window.location.href = '#' + this.projIds[pos];
-                this.id = this.projIds[pos];
+                this.scrollTo(this.projIds[i - 1]);
                 return;
             }
         }
-
-
     }
-
-};
+}
 
 export default Carosel;
