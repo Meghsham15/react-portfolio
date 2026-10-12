@@ -1,13 +1,24 @@
 {
   "files": {
-    "main.css": "/react-portfolio/static/css/main.75b48d8e.css",
-    "main.js": "/react-portfolio/static/js/main.a17b34e0.js",
+    "main.css": "/react-portfolio/static/css/main.c059c18a.css",
+    "main.js": "/react-portfolio/static/js/main.1c0d95aa.js",
     "index.html": "/react-portfolio/index.html",
-    "main.75b48d8e.css.map": "/react-portfolio/static/css/main.75b48d8e.css.map",
-    "main.a17b34e0.js.map": "/react-portfolio/static/js/main.a17b34e0.js.map"
+    "static/media/chatgpt.svg": "/react-portfolio/static/media/chatgpt.eb53fe693c9aa6856c9d1b34a09f6f3f.svg",
+    "static/media/gemini.svg": "/react-portfolio/static/media/gemini.21d44b5eba3066557ad5ff3fd144009c.svg",
+    "static/media/sparkles.svg": "/react-portfolio/static/media/sparkles.15cb7829b29981a5b8995911484e7feb.svg",
+    "static/media/jsts.svg": "/react-portfolio/static/media/jsts.4d6d0d92fc101daa0eae25a0e1614148.svg",
+    "static/media/messages-square.svg": "/react-portfolio/static/media/messages-square.3e145242e800dffcdc5889e355f95c05.svg",
+    "static/media/sprout.svg": "/react-portfolio/static/media/sprout.1814bfd6146cf77b2922c41fa8107234.svg",
+    "static/media/groq.svg": "/react-portfolio/static/media/groq.d7a036e1e1c82d24899e9aa64c3a3860.svg",
+    "static/media/book-open.svg": "/react-portfolio/static/media/book-open.04812bafa2a0bc42c2aacc3fb6ac8dee.svg",
+    "static/media/bot.svg": "/react-portfolio/static/media/bot.6513fae85dd0ea99d07723f2b821826e.svg",
+    "static/media/nextjs.svg": "/react-portfolio/static/media/nextjs.290cdb25833017b91a1c1c0d9057481d.svg",
+    "static/media/deployment.svg": "/react-portfolio/static/media/deployment.da46279e6a11e48d580cd389f4ffa1d5.svg",
+    "main.c059c18a.css.map": "/react-portfolio/static/css/main.c059c18a.css.map",
+    "main.1c0d95aa.js.map": "/react-portfolio/static/js/main.1c0d95aa.js.map"
   },
   "entrypoints": [
-    "static/css/main.75b48d8e.css",
-    "static/js/main.a17b34e0.js"
+    "static/css/main.c059c18a.css",
+    "static/js/main.1c0d95aa.js"
   ]
 }
