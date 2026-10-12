@@ -1,46 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Date from "./Date";
-import Login from "./Login";
-import CommentsContianer from "./CommentsContainer";
-import Logout from "./Logout";
+import Chatbot from "./Chatbot";
 
-function RightContainer(props){
-    const [time,setTime] = useState("");
+function pad(value) {
+    return String(value).padStart(2, "0");
+}
 
-    function countDown() {
-        let dt = new window.Date();
-        let hrs = dt.getHours();
-        let ap = "";
-        if (dt.getHours() >= 12) {
-            ap = "pm";
-            hrs = dt.getHours() - 12;
+function RightContainer(props) {
+    const [time, setTime] = useState("");
+
+    useEffect(() => {
+        function countDown() {
+            const dt = new window.Date();
+            let hrs = dt.getHours();
+            const ap = hrs >= 12 ? "pm" : "am";
+            hrs = hrs % 12;
+            if (hrs === 0) {
+                hrs = 12;
+            }
+            setTime(hrs + ":" + pad(dt.getMinutes()) + ":" + pad(dt.getSeconds()) + " " + ap);
         }
-        else {
-            ap = "am";
-            hrs = dt.getHours();
-        }
-        if(hrs===0){
-            hrs=12;
-        }
-        let mins = dt.getMinutes();
-        let secs = dt.getSeconds();
-        setTime(hrs + ":" + mins + ":" + secs + " " + ap);
-    }
-    setInterval(countDown, 1000);
-
-    function scrollTop(){
-        let element = document.getElementById('comments');
-        element.scrollTop = element.scrollHeight+90;
-    }
-
-    // function handleScroll(e){
-    //     console.log(e.target.scrollTop);
-    // }
+        countDown();
+        const timer = setInterval(countDown, 1000);
+        return () => clearInterval(timer);
+    }, []);
 
     return (
-        <div id="rightContainer" className="rightContainer">
+        <div id="rightContainer" className={"rightContainer" + (props.chatOpen ? " chat-open" : "")}>
             <div className="downScrollR">
-                <marquee behavior="" direction="right" className="scroll">scroll---&gt;</marquee>
+                <span className="scroll">scroll ---&gt;</span>
             </div>
             <div className="dateTime">
                 <div id="date" className="date">
@@ -50,14 +38,11 @@ function RightContainer(props){
                     {time}
                 </div>
             </div>
-            <div id="comments" className={props.authStatus?"comments commentsLog":""}>
-                {props.authStatus?<CommentsContianer setLoader={props.setLoader} scrollTop={scrollTop} setComments={props.setComments} commentsArr={props.comments}/>:<Login/>}
+            <div className="chatPanel">
+                <Chatbot onClose={props.onCloseChat} />
             </div>
-            {props.authStatus?<Logout setLoader={props.setLoader} setAuth={props.setAuth} />:<></>}
         </div>
-
     );
-
-};
+}
 
 export default RightContainer;

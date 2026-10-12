@@ -10,17 +10,13 @@ function Let(props){
 
     function handleMouseLeave(e){
         let ele = e.target;
-        let interval = setInterval(function () {
-            ele.style = "none";
-            clearInterval(interval)
-        },1000);
-        // setInterval(function () {
-        //     ele.style = "none";
-        // }, 1500);
+        window.setTimeout(function () {
+            ele.style.animation = "none";
+        }, 1000);
     }
 
     return(
-        <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} class="let">
+        <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="let">
             {props.letter} 
         </div>
     )

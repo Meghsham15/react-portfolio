@@ -11,17 +11,17 @@ function ProjectItem(props) {
     }
 
     return (
-        <div onClick={handleClick} id={props.id} class="projectContent">
-            <a class="proInner">
-                <div class="proImg">
+        <div onClick={handleClick} id={props.id} className="projectContent">
+            <div className="proInner">
+                <div className="proImg">
                     <img src={props.img} alt="" />
                 </div>
-                <div class="proInfo">
+                <div className="proInfo">
                     <h2>
                         {props.name}
                     </h2>
                 </div>
-            </a>
+            </div>
         </div>
     )
 }

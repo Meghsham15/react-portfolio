@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import { useEffect, useState } from "react";
 import Container from "./Container";
 import Loader from "./Loader";
@@ -10,43 +9,45 @@ function App() {
   const [isHidden, setHidden] = useState(false);
   const [isAuth, setAuth] = useState();
   const [comments, setComments] = useState();
-  const [Images,setImages] = useState();
-  const [loaded,setLoaded] = useState(false);
-  useEffect(async () => {
-    await getImages();
+  const [Images, setImages] = useState();
+  const [loaded, setLoaded] = useState(false);
 
-    if(window.innerWidth<630){
-      alert('Use laptop or desktop for better experience')
+  useEffect(() => {
+    let hideTimer;
+    let cancelled = false;
+
+    async function start() {
+      await Auth.makeGetRequest();
+      if (cancelled) {
+        return;
+      }
+      setImages(Auth.getImages());
+      setLoaded(true);
+      hideTimer = setTimeout(function () {
+        if (!cancelled) {
+          setHidden(true);
+        }
+      }, 1900);
+    }
+
+    start();
+
+    return () => {
+      cancelled = true;
+      clearTimeout(hideTimer);
     };
-    let interval = setTimeout(function () {
-      setHidden(true);
-      clearInterval(interval);
-    }, 1900);
   }, []);
 
-  async function getImages(){
-    await Auth.makeGetRequest();
-    let data = Auth.getImages(); 
-    console.log("image url -"+  data.mjlogo);
-    setImages(data);
-    setLoaded(true);
-  };
-  // useEffect(() => {
-  //   let interval = setTimeout(function () {
-  //     document.getElementById("loadingIndicator").style.display = "none";
-  //     clearInterval(interval);
-  //   }, 2000);
-  // }, []);
+  if (!loaded) {
+    return null;
+  }
 
   return (
     <>
-      {loaded?<><Loader Images={Images} isHidden={isHidden} />
-      
+      <Loader Images={Images} isHidden={isHidden} />
       <RegLogin Images={Images} setLoader={setHidden} setCommentsArr={setComments} isAuthFun={setAuth} />
-
       <ResumeContainer Images={Images} />
-
-      <Container Images={Images} setLoader={setHidden} setComments={setComments} comments={comments} setAuth={setAuth} isAuth={isAuth} /></>:<></>}
+      <Container Images={Images} setLoader={setHidden} setComments={setComments} comments={comments} setAuth={setAuth} isAuth={isAuth} />
     </>
   );
 }

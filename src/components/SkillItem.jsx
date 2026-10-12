@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -50,9 +50,8 @@ function SkillItem(props) {
 
     function handleMouseLeave(e) {
         let ele = e.target;
-        let interval = setInterval(function () {
-            ele.style = "none";
-            clearInterval(interval)
+        window.setTimeout(function () {
+            ele.style.animation = "none";
         }, 1000);
         // setInterval(function () {
         //     ele.style = "none";

@@ -1,127 +1,102 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Navbar from "./Navbar";
 import IntroContainer from "./IntroContainer";
 import SkillsContainer from "./SkillsContainer";
 import ProjectsContainer from "./PorjectsContainer";
 
+const SECTION_IDS = ["intro", "skills", "projects"];
 
+function MidContainer({ scrollRef, activeSection, onSectionChange, onOpenChat }) {
+    const lastSection = useRef("");
 
-function MidContainer() {
-
-    // function fadeUp() {
-    //     var elements = document.querySelectorAll("#fadeUp1, #fadeUp2, #fadeUp3");
-    //     elements.forEach(function (element) {
-    //         element.style.animation = "fadeUp 1s ease-in-out forwards";
-    //     });
-    // }
-
-    function fadeEle(ele,animation) {
-        var elements = document.querySelectorAll(ele);
-        elements.forEach(function (element) {
+    function fadeEle(ele, animation) {
+        document.querySelectorAll(ele).forEach(function (element) {
             element.style.animation = animation;
         });
-    };
-
-    function animateSkillEle(val){
-        if (val > 280 && val < 903) {
-            fadeEle("#fadeUp1, #fadeUp2, #fadeUp3","fadeUp 1s ease-in-out forwards");
-            fadeEle("#fadeLeft1,#fadeLeft2,#fadeLeft3","fadeLeft 1s ease-in-out forwards");
-            fadeEle("#fadeRight1,#fadeRight2,#fadeRight3","fadeRight 1s ease-in-out forwards");
-            fadeEle(".skillsInner h1","fadeUpIn 1s ease-in-out forwards");
-        } else {
-            fadeEle("#fadeUp1,#fadeUp2,#fadeUp3","none");
-            fadeEle("#fadeLeft1,#fadeLeft2,#fadeLeft3","none");
-            fadeEle("#fadeRight1,#fadeRight2,#fadeRight3","none");
-            fadeEle(".skillsInner h1","none");
-        }
-
     }
 
-    function removeFooterCss(){
-        document.querySelectorAll("footer ul li ").forEach(function(ele){
-            ele.classList.remove("footer-click");
-        });
-        document.querySelectorAll("footer ul li ").forEach(function(ele){
-            ele.classList.add("footer");
-        });
-        document.querySelectorAll("footer ul li a").forEach(function(ele){
-            ele.classList.remove("navigator-click");
-        });
-        document.querySelectorAll("footer ul li a").forEach(function(ele){
-            ele.classList.add("navigator");
-        });
+    function setSkillAnimations(on) {
+        fadeEle("#fadeUp1, #fadeUp2, #fadeUp3", on ? "fadeUp 1s ease-in-out forwards" : "none");
+        fadeEle("#fadeLeft1,#fadeLeft2,#fadeLeft3", on ? "fadeLeft 1s ease-in-out forwards" : "none");
+        fadeEle("#fadeRight1,#fadeRight2,#fadeRight3,#fadeRight4", on ? "fadeRight 1s ease-in-out forwards" : "none");
+        fadeEle(".skillsInner h1", on ? "fadeUpIn 1s ease-in-out forwards" : "none");
     }
 
-    function animateFooter(scrollVal){
-        if (scrollVal > 0 && scrollVal < 453) {
-            removeFooterCss();
-            document.querySelector("#f1 a").classList.remove("navigator");
-            document.querySelector("#f1 a").classList.add("navigator-click");
-            document.querySelector("#f1").classList.remove("footer");
-            document.querySelector("#f1").classList.add("footer-click");
-            document.querySelectorAll(".downScrollL,.downScrollR").forEach(function(ele){
-                ele.style.transform = "rotate(90deg)"
-            });
+    function setProjectAnimations(on) {
+        const heading = document.querySelector(".projectsInner h1");
+        const box = document.querySelector(".projectBox");
+        if (heading) {
+            heading.style.animation = on ? "fadeUpIn 1s ease-in-out forwards" : "none";
         }
-        if (scrollVal > 453 && scrollVal < 945) {
-            // document.querySelector("footer ul li ").classList.remove("footer-click");
-            // document.querySelector("footer ul li ").classList.add("footer");
-            // document.querySelector("footer ul li a").classList.remove("navigator-click");
-            // document.querySelector("footer ul li a").classList.add("navigator");
-            removeFooterCss();
-            document.querySelector("#f2 a").classList.remove("navigator");
-            document.querySelector("#f2 a").classList.add("navigator-click");
-            document.querySelector("#f2").classList.remove("footer");
-            document.querySelector("#f2").classList.add("footer-click");
-            document.querySelector(".downScrollL").style.transform =  "rotate(90deg)";
-            document.querySelector(".downScrollR").style.transform = "rotate(270deg)";
-        }
-        if (scrollVal > 945 && scrollVal < 1120) {
-            // document.querySelector("footer ul li ").classList.remove("footer-click");
-            // document.querySelector("footer ul li ").classList.add("footer");
-            // document.querySelector("footer ul li a").classList.remove("navigator-click");
-            // document.querySelector("footer ul li a").classList.add("navigator");
-            removeFooterCss();
-            document.querySelector("#f3 a").classList.remove("navigator");
-            document.querySelector("#f3 a").classList.add("navigator-click");
-            document.querySelector("#f3").classList.remove("footer");
-            document.querySelector("#f3").classList.add("footer-click");
-            document.querySelectorAll(".downScrollL,.downScrollR").forEach(function(ele){
-                ele.style.transform = "rotate(270deg)"
-            });
+        if (box) {
+            box.style.animation = on ? "popUpIn 1s ease-in-out forwards" : "none";
         }
     }
 
-    function animateProjectsEle(scrollVal){
-        if (scrollVal > 900) {
-            document.querySelector(".projectsInner h1").style.animation = "fadeUpIn 1s ease-in-out forwards";
-            document.querySelector(".projectBox").style.animation = "popUpIn 1s ease-in-out forwards";
-        } else {
-            document.querySelector(".projectsInner h1").style.animation = "none";
-            document.querySelector(".projectBox").style.animation = "none";
+    function setScrollHints(section) {
+        const left = document.querySelector(".downScrollL");
+        const right = document.querySelector(".downScrollR");
+        if (!left || !right) {
+            return;
         }
+        if (section === "projects") {
+            left.style.transform = "rotate(270deg)";
+            right.style.transform = "rotate(270deg)";
+            return;
+        }
+        if (section === "skills") {
+            left.style.transform = "rotate(90deg)";
+            right.style.transform = "rotate(270deg)";
+            return;
+        }
+        left.style.transform = "rotate(90deg)";
+        right.style.transform = "rotate(90deg)";
     }
 
+    function sectionFromScroll(root) {
+        const marker = root.getBoundingClientRect().top + root.clientHeight * 0.32;
+        let current = SECTION_IDS[0];
+        SECTION_IDS.forEach(function (id) {
+            const el = root.querySelector("#" + id);
+            if (el && el.getBoundingClientRect().top <= marker) {
+                current = id;
+            }
+        });
+        return current;
+    }
 
     function handleScroll(e) {
-        let scrollVal = Math.floor(e.target.scrollTop);
-        animateSkillEle(scrollVal);
-        animateFooter(scrollVal);
-        animateProjectsEle(scrollVal);
+        onSectionChange(sectionFromScroll(e.target));
     }
 
+    useEffect(function () {
+        if (lastSection.current === activeSection) {
+            return;
+        }
+        lastSection.current = activeSection;
+        setSkillAnimations(activeSection === "skills");
+        setProjectAnimations(activeSection === "projects");
+        setScrollHints(activeSection);
+    }, [activeSection]);
+
+    useEffect(function () {
+        const root = scrollRef && scrollRef.current;
+        if (!root) {
+            return;
+        }
+        onSectionChange(sectionFromScroll(root));
+    }, [scrollRef, onSectionChange]);
+
     return (
-        <div onScroll={handleScroll} className="midContainer">
-            <div class="midMain">
-                <Navbar />
+        <div ref={scrollRef} onScroll={handleScroll} className="midContainer">
+            <div className="midMain">
+                <Navbar onOpenChat={onOpenChat} />
                 <IntroContainer />
                 <SkillsContainer />
                 <ProjectsContainer />
             </div>
         </div>
-
     );
-
-};
+}
 
 export default MidContainer;

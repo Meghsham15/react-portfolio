@@ -38,9 +38,9 @@ function Login({classes}) {
     }, 4000);
     
     return (
-        <div class="login">
+        <div className="login">
             <h3>Leave a review - </h3>
-            <div class="btn">
+            <div className="btn">
                 <form>
                     <marquee behavior="" direction="right">→</marquee>
                     <Tooltip title="Login to leave a review" classes={{ tooltip: classes.customTooltip }}><button onClick={handleClick} id="login" class="104">login</button>

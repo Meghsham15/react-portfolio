@@ -34,7 +34,7 @@ function Logout(props) {
         <div id="logout">
             <Tooltip title="Leave a comment before logout?" classes={{ tooltip: props.classes.customTooltip }}>
                 <a id="logoutUser">
-                    <div class="logout" id="logoutUser" onClick={handleClick}>Logout</div>
+                    <div className="logout" id="logoutUser" onClick={handleClick}>Logout</div>
                 </a>
             </Tooltip>
         </div>

@@ -1,6 +1,8 @@
 import React from "react";
 import Images from "./Images";
 import Let from "./Let";
+import WeatherWidget from "./WeatherWidget";
+import useMaxWidth from "./useMaxWidth";
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -21,9 +23,10 @@ const styles = (theme) => ({
 
 
 function IntroContainer({ classes }) {
+    const isMobile = useMaxWidth(900);
     let fullStack = "Full-Stack".split("");
     let webDeveloper = "Web-Developer".split("");
-    let intro = process.env.REACT_APP_Intro;
+    let intro = "Full Stack Developer at Suscin Innovation Labs in Pune, building end-to-end web applications with JavaScript, React, Next.js, Node.js, and MongoDB. I also work with Python, REST APIs, and ICP blockchain, after a JavaScript internship at Shunyadotek and while completing a B.E. in Electronics and Telecommunication at JSPM BSIOTR.";
     // console.log(intro);
 
 
@@ -69,11 +72,11 @@ function IntroContainer({ classes }) {
                         <h4>{intro}
                         </h4>
                     </div>
+                    {isMobile ? <WeatherWidget className="introWeatherLine" /> : null}
                 </div>
                 <div className="img">
                     <Tooltip title="Meghsham Jade " classes={{ tooltip: classes.customTooltip }}>
-
-                    <img src={Images.mj} alt="MJ" />
+                        <img src={Images.mj} alt="MJ" />
                     </Tooltip>
                 </div>
             </div>

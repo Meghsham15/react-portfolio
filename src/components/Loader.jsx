@@ -10,8 +10,13 @@ function Loader(props) {
     },[])
 
     return (
-        <div hidden={props.isHidden} id="loadingIndicator" className="image-container" >
-            <img id="rotatingImage" src={props.Images.mjlogo} alt="Rotating Image" />
+        <div
+            id="loadingIndicator"
+            className={"image-container" + (props.isHidden ? " is-hidden" : "")}
+            hidden={props.isHidden}
+            aria-hidden={props.isHidden}
+        >
+            <img id="rotatingImage" src={props.Images && props.Images.mjlogo} alt="Loading" />
         </div>
     );
 }
