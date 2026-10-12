@@ -37,7 +37,7 @@ body{
 }
 .popMain h1{
     margin: 15px 0px;
-    color: #2ca6b1;
+    color: #d4af37;
     text-shadow: none;
 }
 .popMain h3 {
@@ -51,19 +51,19 @@ body{
     width: 85%;
     display: flex;
     justify-content: space-evenly;
-    color: #2ca6b1;
+    color: #d4af37;
 }
 .webLink h4 {
     font-size: 1.2vw;
     font-family: sans-serif;
 }
 .webLink a {
-    color: #2ca6b1;
+    color: #d4af37;
     font-family: sans-serif;
     font-size: 1.2vw;
 }
 .webLink a:hover{
-    color: #ab0101;
+    color: #c9a227;
 }
 .proPopB{
     z-index: 2;

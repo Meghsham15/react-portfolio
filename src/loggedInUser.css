@@ -26,18 +26,18 @@ footer {
     overflow: hidden;
     overflow-y: scroll;
     /* background: #000000; */
-    box-shadow: inset 1px 1px 14px 2px #ff0404;
+    box-shadow: inset 1px 1px 14px 2px #7a1f3d;
 }
 .comments::-webkit-scrollbar{
     width: 3px;
 }
 .comments::-webkit-scrollbar-track {
-    background: #02788b; 
+    background: #3d3318; 
 }
    
   /* Handle */
 .comments::-webkit-scrollbar-thumb {
-    background: #9f0606; 
+    background: #7a1f3d; 
 }
   
   /* Handle on hover */
@@ -97,11 +97,11 @@ footer {
 #buttons button:hover{
     transform: scale(1.1);
     box-shadow: 1px 1px 4px 0px #f41515, -1px -1px 4px 0px #f41515;
-    color: aliceblue;
+    color: #f6ecd8;
     background: black;
 }
 .comments hr{
-    color: aliceblue;
+    color: #f6ecd8;
     width: 100%;
     margin-top: -12px;
 }
@@ -122,7 +122,7 @@ footer {
     /* box-shadow: inset 1px 1px 8px 2px; */
     width: 100%;
     margin: 0.2vw 0vw;
-    color: aliceblue;
+    color: #f6ecd8;
     text-align: center;
     position: relative;
     /* height: 9%; */
@@ -152,7 +152,7 @@ footer {
     display: flex;
     text-align: center;
     letter-spacing: 0.1vw;
-    color: #0082a3;
+    color: #c9a96e;
     font-family: 'Josefin Sans', sans-serif;
     margin-bottom: 0px;
 }
@@ -162,7 +162,7 @@ footer {
     transition: all 0.3s ease-in-out;
 }
 #cmt h3:hover{
-    color: aliceblue;
+    color: #f6ecd8;
 }
 #logout {
     width: 45%;
@@ -173,7 +173,7 @@ footer {
     transition: all 0.3s ease-in-out;
 }
 #logout:hover{
-    box-shadow: 1px 1px 4px 1px #0082a3, -1px -1px 4px 1px #0082a3;
+    box-shadow: 1px 1px 4px 1px #c9a96e, -1px -1px 4px 1px #c9a96e;
     transform: scale(1.1);
     border-radius: 0.3vw;
 }
@@ -199,6 +199,6 @@ footer {
 
 .logout:hover{
     background: black;
-    color: #f51515;
+    color: #c45c6a;
     cursor: pointer;
 }

@@ -49,8 +49,8 @@ h1 {
 }
 .focus:focus {
     border: none;
-    border-bottom: 2px solid rgb(3 118 129);
-    border-right: 2px solid rgb(3 118 129);
+    border-bottom: 2px solid rgb(212 175 55);
+    border-right: 2px solid rgb(212 175 55);
     outline-style: none;
 }
 .loginContainer form button {
@@ -68,7 +68,7 @@ h1 {
 .loginContainer form button:hover {
     transform: scale(1.1);
     box-shadow: 1px 1px 4px 0px;
-    box-shadow: 1px 1px 8px 0px #026c70 ;
+    box-shadow: 1px 1px 8px 0px #d4af37 ;
     filter: invert(1);
 }
 .ask{
@@ -86,7 +86,7 @@ h1 {
     padding: 0.4vw;
     border-radius: 0.5vw;
     border: 1px solid;
-    color: #048f9d;
+    color: #d4af37;
     transition: all 0.3s ease-in-out;
 }
 .ask a:hover{

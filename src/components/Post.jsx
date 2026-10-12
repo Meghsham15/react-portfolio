@@ -4,15 +4,15 @@ import { withStyles } from '@material-ui/core/styles';
  
 const styles = (theme) => ({
     customTooltip: {
-        backgroundColor: 'black', // Customize background color
-        color: 'red', // Customize text color
+        backgroundColor: '#1c1914', // Customize background color
+        color: '#efe8de', // Customize text color
         fontSize: '1.1vw', // Customize font size
-        borderRadius: '8px', // Customize border radius
+        borderRadius: '4px', // Customize border radius
         padding: '8px', // Add padding
         // Add any other custom styles here
-        border:"1px solid #03989e",
-        fontFamily: '"Josefin Sans", sans-serif',
-        boxShadow:"0px 0px 3px 0.5px #03989e",
+        border:"1px solid #c9a46a",
+        fontFamily: '"Figtree", sans-serif',
+        boxShadow:"0px 8px 24px rgba(20, 18, 15, 0.45)",
     },
 });
 

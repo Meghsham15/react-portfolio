@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import './loggedInUser.css';
 import './index.css';
+import './site.css';
 // import './pop.css';
 // import './login.css';
 import App from './components/App';

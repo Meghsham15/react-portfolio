@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://meghsham15.github.io/react-portfolio/sitemap.xml
