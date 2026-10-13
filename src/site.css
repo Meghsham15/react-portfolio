@@ -1304,3 +1304,271 @@ html.site .resumeCont * {
     scroll-behavior: auto;
   }
 }
+
+/* --- Initial studio loader --- */
+html.boot-lock,
+html.boot-lock body {
+  overflow: hidden !important;
+}
+
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: grid;
+  place-items: center;
+  background: #030303;
+  color: #fff;
+  overflow: hidden;
+  font-family: Outfit, sans-serif;
+}
+
+.boot.is-exiting {
+  animation: bootCurtain 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  pointer-events: none;
+}
+
+.boot.is-exiting .boot-stage {
+  animation: bootStageOut 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes bootCurtain {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes bootStageOut {
+  to {
+    opacity: 0;
+    transform: translateY(-16px) scale(1.035);
+  }
+}
+
+.boot-mesh,
+.boot-grain,
+.boot-frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.boot-mesh {
+  inset: -18%;
+}
+
+.boot-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.boot-orb-a {
+  width: 46vw;
+  height: 46vw;
+  left: 6%;
+  top: 8%;
+  background: rgba(112, 0, 255, 0.38);
+  animation: bootDrift 16s ease-in-out infinite;
+}
+
+.boot-orb-b {
+  width: 38vw;
+  height: 38vw;
+  right: 4%;
+  bottom: 6%;
+  background: rgba(0, 240, 255, 0.22);
+  animation: bootDrift 18s ease-in-out infinite reverse;
+}
+
+@keyframes bootDrift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(4%, -3%, 0) scale(1.08); }
+}
+
+.boot-grain {
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+}
+
+.boot-frame {
+  inset: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.boot-top,
+.boot-foot {
+  position: absolute;
+  left: 34px;
+  right: 34px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.boot-top { top: 32px; }
+.boot-foot { bottom: 32px; }
+
+.boot-count {
+  color: #fff;
+}
+
+.boot-stage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.boot-mark {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  margin-bottom: 28px;
+}
+
+.boot-glow {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.22), rgba(112, 0, 255, 0.08) 58%, transparent 72%);
+  filter: blur(6px);
+}
+
+.boot-ring {
+  width: 100%;
+  height: 100%;
+  animation: bootSpin 2.6s linear infinite;
+}
+
+.boot-ring-track,
+.boot-ring-arc {
+  fill: none;
+  stroke-width: 1.25;
+}
+
+.boot-ring-track {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+.boot-ring-arc {
+  stroke: url(#boot-ring-grad);
+  stroke-linecap: round;
+  stroke-dasharray: 92 298;
+}
+
+@keyframes bootSpin {
+  to { transform: rotate(360deg); }
+}
+
+.boot-disc {
+  position: absolute;
+  inset: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(20, 20, 22, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 0 40px rgba(112, 0, 255, 0.22), inset 0 0 18px rgba(0, 240, 255, 0.06);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-indent: 0.18em;
+}
+
+.boot-kicker {
+  margin: 0 0 8px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.boot-name,
+.boot-disc {
+  font-family: Outfit, sans-serif;
+}
+
+.boot-name {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.boot-role {
+  margin: 12px 0 0;
+  font-family: Outfit, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: #00f0ff;
+  text-shadow: 0 0 18px rgba(0, 240, 255, 0.45);
+}
+
+.boot-meter {
+  width: min(240px, 64vw);
+  height: 1px;
+  margin-top: 28px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.boot-meter span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #00f0ff, #7000ff);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.65);
+}
+
+.boot-live {
+  color: #fff;
+}
+
+@media (max-width: 700px) {
+  .boot-frame { inset: 10px; }
+  .boot-top, .boot-foot {
+    left: 22px;
+    right: 22px;
+  }
+  .boot-top { top: 22px; }
+  .boot-foot { bottom: 22px; }
+  .boot-mark {
+    width: 112px;
+    height: 112px;
+    margin-bottom: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-ring,
+  .boot-orb-a,
+  .boot-orb-b {
+    animation: none;
+  }
+
+  .boot.is-exiting {
+    animation-duration: 0.2s;
+  }
+
+  .boot.is-exiting .boot-stage {
+    animation: none;
+    opacity: 0;
+  }
+}

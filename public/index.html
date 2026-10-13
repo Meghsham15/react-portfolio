@@ -6,6 +6,37 @@
   <link rel="icon" href="%PUBLIC_URL%/mjlogo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#030303" />
+  <style>
+    html { background: #030303; color-scheme: dark; }
+    body { margin: 0; background: #030303; }
+    #boot-splash {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #030303;
+      color: #fff;
+      font-family: system-ui, sans-serif;
+      text-align: center;
+    }
+    #boot-splash strong {
+      display: grid;
+      place-items: center;
+      width: 84px;
+      height: 84px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      letter-spacing: 0.18em;
+      font-size: 18px;
+      font-weight: 600;
+      text-indent: 0.18em;
+    }
+    #boot-splash span {
+      display: block;
+      font-size: 22px;
+      letter-spacing: -0.04em;
+    }
+  </style>
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="author" content="Meghsham Jade" />
   <meta name="description"
@@ -95,7 +126,14 @@
       <a href="https://www.linkedin.com/in/meghsham-jade-2a3406218/">LinkedIn</a>
     </p>
   </noscript>
-  <div id="root"></div>
+  <div id="root">
+    <div id="boot-splash">
+      <div>
+        <strong>MJ</strong>
+        <span>Meghsham Jade</span>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

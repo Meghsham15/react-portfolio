@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import BootLoader from "./BootLoader";
 import Container from "./Container";
 import Loader from "./Loader";
 import RegLogin from "./RegLogin";
@@ -6,14 +7,15 @@ import ResumeContainer from "./ResumeContainer";
 import Auth from "./Auth";
 
 function App() {
-  const [isHidden, setHidden] = useState(false);
+  const [isHidden, setHidden] = useState(true);
   const [isAuth, setAuth] = useState();
   const [comments, setComments] = useState();
   const [Images, setImages] = useState();
   const [loaded, setLoaded] = useState(false);
+  const [revealed, setRevealed] = useState(false);
+  const [bootDone, setBootDone] = useState(false);
 
   useEffect(() => {
-    let hideTimer;
     let cancelled = false;
 
     async function start() {
@@ -23,31 +25,36 @@ function App() {
       }
       setImages(Auth.getImages());
       setLoaded(true);
-      hideTimer = setTimeout(function () {
-        if (!cancelled) {
-          setHidden(true);
-        }
-      }, 1900);
     }
 
     start();
 
     return () => {
       cancelled = true;
-      clearTimeout(hideTimer);
     };
   }, []);
 
-  if (!loaded) {
-    return null;
-  }
-
   return (
     <>
-      <Loader Images={Images} isHidden={isHidden} />
-      <RegLogin Images={Images} setLoader={setHidden} setCommentsArr={setComments} isAuthFun={setAuth} />
-      <ResumeContainer Images={Images} />
-      <Container Images={Images} setLoader={setHidden} setComments={setComments} comments={comments} setAuth={setAuth} isAuth={isAuth} />
+      {bootDone ? null : (
+        <BootLoader
+          ready={loaded}
+          onReveal={function () {
+            setRevealed(true);
+          }}
+          onDone={function () {
+            setBootDone(true);
+          }}
+        />
+      )}
+      {revealed && loaded ? (
+        <>
+          <Loader Images={Images} isHidden={isHidden} />
+          <RegLogin Images={Images} setLoader={setHidden} setCommentsArr={setComments} isAuthFun={setAuth} />
+          <ResumeContainer Images={Images} />
+          <Container Images={Images} setLoader={setHidden} setComments={setComments} comments={comments} setAuth={setAuth} isAuth={isAuth} />
+        </>
+      ) : null}
     </>
   );
 }
