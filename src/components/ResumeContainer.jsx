@@ -1,6 +1,6 @@
 import React from "react";
 
-const RESUME_DOC_ID = "1OBncUErdJSoyGLpi-k-0GyqTz0C4hc8o2_nXcAk_k1g";
+const RESUME_DOC_ID = "1gJBTwDJVxCkr0vPzj7s_R3Lnji7CQ-WTEdTWTtLgAq4";
 const RESUME_PREVIEW_URL = `https://docs.google.com/document/d/${RESUME_DOC_ID}/preview`;
 const RESUME_OPEN_URL = `https://docs.google.com/document/d/${RESUME_DOC_ID}/edit?usp=sharing`;
 
