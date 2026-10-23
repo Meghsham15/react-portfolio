@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-portfolio/static/css/main.fc24d0c7.css",
-    "main.js": "/react-portfolio/static/js/main.85ade556.js",
+    "main.js": "/react-portfolio/static/js/main.fed8c929.js",
     "index.html": "/react-portfolio/index.html",
     "static/media/chatgpt.svg": "/react-portfolio/static/media/chatgpt.eb53fe693c9aa6856c9d1b34a09f6f3f.svg",
     "static/media/gemini.svg": "/react-portfolio/static/media/gemini.21d44b5eba3066557ad5ff3fd144009c.svg",
@@ -15,10 +15,10 @@
     "static/media/nextjs.svg": "/react-portfolio/static/media/nextjs.290cdb25833017b91a1c1c0d9057481d.svg",
     "static/media/deployment.svg": "/react-portfolio/static/media/deployment.da46279e6a11e48d580cd389f4ffa1d5.svg",
     "main.fc24d0c7.css.map": "/react-portfolio/static/css/main.fc24d0c7.css.map",
-    "main.85ade556.js.map": "/react-portfolio/static/js/main.85ade556.js.map"
+    "main.fed8c929.js.map": "/react-portfolio/static/js/main.fed8c929.js.map"
   },
   "entrypoints": [
     "static/css/main.fc24d0c7.css",
-    "static/js/main.85ade556.js"
+    "static/js/main.fed8c929.js"
   ]
 }
