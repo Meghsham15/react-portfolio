@@ -23,21 +23,30 @@ function CustomCursor() {
         let targetY = 0;
         let frame;
 
+        function place(x, y, instant) {
+            targetX = x;
+            targetY = y;
+            dot.style.left = x + "px";
+            dot.style.top = y + "px";
+            if (instant || reduceMotion) {
+                ringX = x;
+                ringY = y;
+                ring.style.left = x + "px";
+                ring.style.top = y + "px";
+            }
+        }
+
         function move(event) {
-            const native = event.target.closest("input, textarea, select, iframe, .site-chat, .resumeCont");
+            const native = event.target.closest("input, textarea, select, iframe, .resumeCont, .boot");
             if (native) {
                 document.body.classList.remove("cursor-live");
+                document.body.classList.add("cursor-native");
                 return;
             }
+            const wasNative = document.body.classList.contains("cursor-native");
+            document.body.classList.remove("cursor-native");
             document.body.classList.add("cursor-live");
-            targetX = event.clientX;
-            targetY = event.clientY;
-            dot.style.left = targetX + "px";
-            dot.style.top = targetY + "px";
-            if (reduceMotion) {
-                ring.style.left = targetX + "px";
-                ring.style.top = targetY + "px";
-            }
+            place(event.clientX, event.clientY, wasNative);
         }
 
         function tick() {
@@ -74,6 +83,7 @@ function CustomCursor() {
             cancelAnimationFrame(frame);
             document.body.classList.remove("hovering");
             document.body.classList.remove("cursor-live");
+            document.body.classList.remove("cursor-native");
         };
     }, []);
 

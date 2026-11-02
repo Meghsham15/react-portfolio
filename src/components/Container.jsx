@@ -1,51 +1,132 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Chatbot from "./Chatbot";
 import CustomCursor from "./CustomCursor";
-import GlassPanel from "./GlassPanel";
 import SiteEffects from "./SiteEffects";
 import Typewriter from "./Typewriter";
 import projects from "./projects";
-import skills from "./skills";
-import devSkills from "./devSkills";
 
-const TECH_PILLS = ["Node.js", "Next.js / React", "Python", "MongoDB / SQL", "ICP / Web3"];
+const NAV = ["about", "stack", "work", "jobs", "contact"];
 
 const FEATURED = [
     {
+        id: 113,
+        title: "AI Book",
+        kicker: "Multi-tenant RAG knowledge base",
+        copy: "Teams create shared libraries, upload PDFs, websites, and notes, then ask grounded questions with streaming answers and source citations.",
+        bullets: [
+            "Role-based access for Owner, Admin, Manager, and Member, with email invitations and ownership transfer",
+            "RAG pipeline with document chunking, NVIDIA 4096-dim embeddings, and MongoDB Atlas Vector Search",
+            "Citation-aware streaming responses, with an in-memory fallback when vector search is unavailable",
+            "Usage analytics, rate limiting, structured error codes, PDF parsing, and a real-time workspace"
+        ],
+        tags: ["Next.js", "TypeScript", "MongoDB Atlas", "LangChain", "NVIDIA Embeddings"],
+        github: "https://github.com/Meghsham15/ai-book"
+    },
+    {
+        id: 114,
+        title: "RAG Portfolio Chatbot",
+        kicker: "Live on this site",
+        copy: "A production RAG chatbot that answers questions about professional experience and projects.",
+        bullets: [
+            "Document chunking, embeddings, and a memory vector store",
+            "Dual-LLM fallback between Gemini and Groq",
+            "Conversation history, plus handling for API quotas and expired tokens"
+        ],
+        tags: ["Node.js", "Express", "LangChain", "Gemini", "Groq", "Vector Store"],
+        github: "https://github.com/Meghsham15/rag-bot",
+        liveAsk: true
+    },
+    {
         id: 109,
-        title: "Real-Time Chat Application",
-        copy: "Built a comprehensive chat application implementing real-time multi-user communication with instant messaging, emoji drawer, and media sharing capabilities.",
-        tags: ["Node.js", "Socket.IO", "EJS"],
-        accent: "cyan",
-        icon: "chat"
+        title: "Real-time chat",
+        kicker: "WebSockets",
+        copy: "A multi-user chat platform with instant messaging, emoji support, and media sharing.",
+        bullets: [
+            "Rooms stay in sync over Socket.IO",
+            "Emoji and media sharing on a Node and Express stack"
+        ],
+        tags: ["Node.js", "Socket.IO", "Express", "EJS"],
+        github: "https://github.com/Meghsham15/chat-app/tree/main"
     },
     {
-        id: 101,
-        title: "Web3 Portfolio Website",
-        copy: "Created a personal portfolio showcasing decentralized web technologies. Developed using cutting-edge Web3 architecture and deployed on the Internet Computer Protocol (ICP).",
-        tags: ["React.js", "ICP Blockchain", "Motoko"],
-        accent: "violet",
-        icon: "flask"
-    },
-    {
-        id: "news",
-        title: "News Application",
-        copy: "Built a dynamic web application to display and filter the latest news across categories like Sports, Politics, and Tech. Included features for pagination and saving favorite articles.",
-        tags: ["React.js", "Material UI", "CurrentsAPI"],
-        accent: "pink",
-        icon: "news"
-    },
-    {
-        id: "gpt",
-        title: "ChatGPT Clone",
-        copy: "Explored OpenAI capabilities by building a functional AI chat interface to gain a better understanding of LLM integration and conversational web apps.",
-        tags: ["Node.js", "Express.js", "OpenAI API"],
-        accent: "green",
-        icon: "code"
+        id: 115,
+        title: "StartBiz",
+        kicker: "Business services site",
+        copy: "Registration and services pages with dynamic routing and custom SEO build scripts.",
+        bullets: [
+            "QR generation and image work aimed at conversion",
+            "Deployed for production traffic",
+            "Cloudflare in front of the static build"
+        ],
+        tags: ["React 19", "Tailwind", "SEO", "Cloudflare"],
+        github: "https://github.com/Meghsham15/startbiz-code"
     }
 ];
 
-const MORE_IDS = [102, 107, 106, 108, 110, 111];
+const MORE_IDS = [101, 102, 107];
+
+const STACK = {
+    languages: ["JavaScript", "TypeScript", "Python", "HTML5", "CSS3"],
+    frontend: ["React.js", "Next.js", "Tailwind CSS", "Material UI"],
+    backend: ["Node.js", "Express.js", "REST APIs", "Socket.IO", "OAuth"],
+    "ai / rag": ["LangChain", "RAG", "Vector Embeddings", "Document Chunking", "Atlas Vector Search", "Gemini", "Groq", "NVIDIA"],
+    data: ["MongoDB", "Mongoose", "SQL"],
+    tools: ["Git", "GitHub", "Vercel", "Cloudflare", "Render", "AWS", "Azure"]
+};
+
+const STACK_FILTERS = ["all", "languages", "frontend", "backend", "ai / rag", "data", "tools"];
+
+const ALSO = ["Meta Business APIs", "NextAuth", "Google OAuth", "Webhooks", "SEO", "Agile"];
+
+const JOBS = [
+    {
+        role: "Full Stack Developer",
+        place: "Suscin Innovation Labs, Pune",
+        when: "July 2024 – Present",
+        copy: "Led a multi-feature business communication platform from architecture through production, on React and Node.js/Express.",
+        bullets: [
+            "Designed Meta Business API integrations for messaging, template management, and real-time flows, including webhooks and status tracking",
+            "Built document processing and chunking pipelines so AI features can retrieve context and answer from it",
+            "Shipped user management, analytics dashboards, notification systems, and automated workflows",
+            "Tested and fixed frontend and backend issues, and worked with other teams on API design, state, and deployment"
+        ],
+        tags: ["React", "Node.js", "Express", "Meta Business API", "Webhooks", "RAG"],
+        skills: [
+            "Next.js",
+            "React.js",
+            "JavaScript",
+            "DOM Manipulation",
+            "HTML5",
+            "CSS3",
+            "Node.js",
+            "Express.js",
+            "REST APIs",
+            "MongoDB",
+            "Mongoose",
+            "Meta Business APIs",
+            "Webhooks",
+            "OAuth",
+            "Document Chunking",
+            "RAG",
+            "Git"
+        ]
+    },
+    {
+        role: "JavaScript Developer Intern",
+        place: "Shunyadotek Company, Pune",
+        when: "November 2022 – April 2023",
+        copy: "Built and maintained web applications in core JavaScript and modern frameworks with senior developers.",
+        bullets: [
+            "Worked on client projects across debugging, testing, and code optimization",
+            "Followed features through the full development lifecycle"
+        ],
+        tags: ["JavaScript", "Debugging", "Testing", "Optimization"]
+    }
+];
+
+const INTERESTS = ["RAG and LangChain", "MERN and Next.js", "Real-time apps", "Web3 and ICP"];
+
+const LANGUAGES = ["English · Professional", "Hindi · Fluent", "Marathi · Native"];
 
 function projectById(id) {
     return projects.find(function (item) {
@@ -60,37 +141,158 @@ function openResume() {
     }
 }
 
-function ProjectIcon({ type }) {
-    if (type === "chat") {
-        return (
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-            </svg>
-        );
-    }
-    if (type === "flask") {
-        return (
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-            </svg>
-        );
-    }
-    if (type === "news") {
-        return (
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H14" />
-            </svg>
-        );
-    }
+function Reveal({ className, children, delay }) {
+    const ref = useRef(null);
+
+    useEffect(function () {
+        const el = ref.current;
+        if (!el) {
+            return undefined;
+        }
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            el.classList.add("is-in");
+            return undefined;
+        }
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    el.classList.add("is-in");
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.18 });
+        observer.observe(el);
+        return function () {
+            observer.disconnect();
+        };
+    }, []);
+
     return (
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-        </svg>
+        <div ref={ref} className={"reveal " + (className || "")} style={delay ? { transitionDelay: delay + "ms" } : undefined}>
+            {children}
+        </div>
+    );
+}
+
+function SectionLabel({ children }) {
+    return (
+        <div className="sec-label">
+            <p>/{children}</p>
+            <span />
+        </div>
+    );
+}
+
+function IdentityCard({ onConnect }) {
+    const ref = useRef(null);
+
+    function move(event) {
+        const el = ref.current;
+        if (!el || window.matchMedia("(hover: none)").matches) {
+            return;
+        }
+        const box = el.getBoundingClientRect();
+        const px = (event.clientX - box.left) / box.width;
+        const py = (event.clientY - box.top) / box.height;
+        el.style.setProperty("--ry", ((px - 0.5) * 16).toFixed(2) + "deg");
+        el.style.setProperty("--rx", ((0.5 - py) * 14).toFixed(2) + "deg");
+    }
+
+    function leave() {
+        const el = ref.current;
+        if (!el) {
+            return;
+        }
+        el.style.setProperty("--ry", "0deg");
+        el.style.setProperty("--rx", "0deg");
+    }
+
+    return (
+        <div className="id-tilt" onMouseMove={move} onMouseLeave={leave}>
+            <article className="id-card" ref={ref}>
+                <div className="id-top">
+                    <div className="id-mark" aria-hidden="true">MJ</div>
+                    <div>
+                        <p className="id-handle">@meghsham15</p>
+                        <p>Available for hire</p>
+                        <p>Pune, Maharashtra</p>
+                    </div>
+                </div>
+                <h3>Meghsham Jade</h3>
+                <p className="id-role">Full Stack AI Developer</p>
+                <p className="id-edu">B.E. Electronics and Telecommunication · JSPM BSIOTR, Wagholi · 2022–2026</p>
+                <button type="button" onClick={onConnect}>Let&apos;s Connect</button>
+            </article>
+        </div>
+    );
+}
+
+function ProjectCard({ item, onAsk }) {
+    const [open, setOpen] = useState(false);
+    const live = projectById(item.id);
+    const shown = open ? item.tags : item.tags.slice(0, 4);
+    const extra = item.tags.length - 4;
+    const stillClass = "case-still" + (live && live.img ? "" : " is-empty");
+    const stillInner = (
+        <>
+            {live && live.img ? <img src={live.img} alt="" /> : <span>{item.title}</span>}
+            <i className="case-shade" />
+            <i className="case-shine" />
+            <div className="case-caption">
+                <h3>{item.title}</h3>
+                <p>{item.kicker}</p>
+            </div>
+        </>
+    );
+
+    return (
+        <article className="case">
+            {item.liveAsk ? (
+                <button type="button" className={stillClass} onClick={onAsk}>
+                    {stillInner}
+                </button>
+            ) : (
+                <a className={stillClass} href={live && live.link ? live.link : item.github} target="_blank" rel="noopener noreferrer">
+                    {stillInner}
+                </a>
+            )}
+            <div className="case-body">
+                <p>{item.copy}</p>
+                <ul>
+                    {item.bullets.map(function (line) {
+                        return <li key={line}>{line}</li>;
+                    })}
+                </ul>
+                <div className="case-tags">
+                    {shown.map(function (tag) {
+                        return <span key={tag}>{tag}</span>;
+                    })}
+                    {extra > 0 ? (
+                        <button type="button" onClick={function () { setOpen(function (value) { return !value; }); }}>
+                            {open ? "− less" : "+" + extra}
+                        </button>
+                    ) : null}
+                </div>
+                <p className="case-links">
+                    <a href={item.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+                    {item.liveAsk ? (
+                        <button type="button" className="case-live" onClick={onAsk}>Live</button>
+                    ) : live && live.link ? (
+                        <a href={live.link} target="_blank" rel="noopener noreferrer">Live</a>
+                    ) : null}
+                </p>
+            </div>
+        </article>
     );
 }
 
 function Container() {
     const [chatOpen, setChatOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [active, setActive] = useState("about");
+    const [navHidden, setNavHidden] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const [filter, setFilter] = useState("all");
 
     useEffect(function () {
         document.documentElement.classList.add("site");
@@ -103,262 +305,327 @@ function Container() {
 
     useEffect(function () {
         document.body.classList.toggle("chat-open", chatOpen);
-        document.body.style.overflow = chatOpen ? "hidden" : "";
+        document.body.classList.toggle("menu-open", menuOpen);
+        document.body.style.overflow = chatOpen || menuOpen ? "hidden" : "";
         return function () {
             document.body.classList.remove("chat-open");
+            document.body.classList.remove("menu-open");
             document.body.style.overflow = "";
         };
-    }, [chatOpen]);
+    }, [chatOpen, menuOpen]);
 
     useEffect(function () {
-        const stacks = document.querySelectorAll(".site-stack");
-        if (!stacks.length) {
-            return undefined;
-        }
-
-        let frame = 0;
-
-        function canStack() {
-            return window.matchMedia("(min-width: 1101px)").matches
-                && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        }
-
-        function reset() {
-            stacks.forEach(function (stack) {
-                const card = stack.querySelector(".site-stack-card");
-                if (card) {
-                    card.style.transform = "";
-                    card.style.filter = "";
-                }
-            });
-        }
-
-        function update() {
-            if (!canStack()) {
-                reset();
-                return;
-            }
-            stacks.forEach(function (stack, index) {
-                const card = stack.querySelector(".site-stack-card");
-                if (!card) {
-                    return;
-                }
-                const next = stacks[index + 1];
-                if (!next) {
-                    card.style.transform = "scale(1)";
-                    card.style.filter = "brightness(1)";
-                    return;
-                }
-                const currentBox = stack.getBoundingClientRect();
-                const nextBox = next.getBoundingClientRect();
-                const overlap = Math.max(0, currentBox.bottom - nextBox.top);
-                const progress = Math.min(1, overlap / Math.max(currentBox.height * 0.65, 1));
-                const scale = 1 - progress * 0.06;
-                const brightness = 1 - progress * 0.12;
-                card.style.transform = "scale(" + scale.toFixed(4) + ")";
-                card.style.filter = "brightness(" + brightness.toFixed(3) + ")";
-            });
-        }
-
+        let last = window.scrollY;
         function onScroll() {
-            cancelAnimationFrame(frame);
-            frame = requestAnimationFrame(update);
+            const y = window.scrollY;
+            setScrolled(y > 8);
+            setNavHidden(y > last && y > 90 && !menuOpen);
+            last = y;
+            const line = y + window.innerHeight * 0.28;
+            let current = NAV[0];
+            NAV.forEach(function (id) {
+                const node = document.getElementById(id);
+                if (node && node.offsetTop <= line) {
+                    current = id;
+                }
+            });
+            setActive(current);
         }
-
         window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", onScroll);
-        update();
-
+        onScroll();
         return function () {
             window.removeEventListener("scroll", onScroll);
-            window.removeEventListener("resize", onScroll);
-            cancelAnimationFrame(frame);
-            reset();
         };
-    }, []);
+    }, [menuOpen]);
 
     const moreWork = MORE_IDS.map(projectById).filter(Boolean);
+    const stackGroups = filter === "all" ? Object.keys(STACK) : [filter];
+
+    function go(id) {
+        setMenuOpen(false);
+        const node = document.getElementById(id);
+        if (node) {
+            node.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    }
 
     return (
         <>
             <CustomCursor />
             <SiteEffects />
-            <div className="mesh-track" aria-hidden="true">
-                <div className="mesh-bg" />
+            <div className="stage-bg" aria-hidden="true">
+                <div className="stage-grid" />
+                <div className="stage-orb stage-orb-a" />
+                <div className="stage-orb stage-orb-b" />
+                <div className="stage-glow" />
             </div>
-            <div className="site-grain" aria-hidden="true" />
-            <div className="site-progress" aria-hidden="true">
-                <span className="site-progress-bar" />
+            <a className="skip" href="#work">Skip to work</a>
+
+            <header className={"nav" + (scrolled ? " is-scrolled" : "") + (navHidden && !menuOpen ? " is-hidden" : "")}>
+                <a className="nav-mark" href="#top" onClick={function (event) { event.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
+                    <pre>&lt;/meghsham&gt;</pre>
+                </a>
+                <nav className="nav-links" aria-label="Page">
+                    {NAV.map(function (id) {
+                        return (
+                            <a key={id} href={"#" + id} className={active === id ? "is-on" : ""} onClick={function (event) { event.preventDefault(); go(id); }}>
+                                /{id}
+                            </a>
+                        );
+                    })}
+                    <button type="button" onClick={openResume}>/resume</button>
+                    <button type="button" className="nav-ask" onClick={function () { setChatOpen(true); }}>Ask</button>
+                </nav>
+                <button type="button" className="nav-burger" aria-label={menuOpen ? "Close menu" : "Toggle menu"} onClick={function () { setMenuOpen(function (value) { return !value; }); }}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        {menuOpen ? (
+                            <path d="M6 6l12 12M18 6L6 18" />
+                        ) : (
+                            <path d="M4 7h16M4 12h16M4 17h16" />
+                        )}
+                    </svg>
+                </button>
+            </header>
+
+            <div className={"nav-sheet" + (menuOpen ? " is-open" : "")} aria-hidden={menuOpen ? undefined : true}>
+                <div className="nav-sheet-links">
+                    {NAV.map(function (id) {
+                        return (
+                            <a key={id} href={"#" + id} className={active === id ? "is-on" : ""} onClick={function (event) { event.preventDefault(); go(id); }}>
+                                /{id}
+                            </a>
+                        );
+                    })}
+                    <button type="button" onClick={function () { setMenuOpen(false); openResume(); }}>/resume</button>
+                    <button type="button" onClick={function () { setMenuOpen(false); setChatOpen(true); }}>/ask</button>
+                    <button type="button" className="nav-close" onClick={function () { setMenuOpen(false); }}>Close Menu</button>
+                </div>
             </div>
 
-            <div className="site-shell">
-                <aside className="site-aside">
-                    <GlassPanel>
-                        <div className="site-status">
-                            <span className="site-status-dot" />
-                            <span>Available for Hire</span>
-                        </div>
+            <main id="top">
+                <section className="hero">
+                    <p className="hero-const">
+                        <span>const</span> developer = <em>&quot;Meghsham Jade&quot;</em>;
+                    </p>
+                    <h1>Full Stack AI Developer</h1>
+                    <h2 className="hero-type"><Typewriter /></h2>
+                    <p className="hero-copy">
+                        Full-Stack Developer focused on AI and RAG systems, with Next.js, Node.js, and MongoDB. 2+ years shipping scalable web applications from architecture to deployment.
+                    </p>
+                    <div className="hero-actions">
+                        <a className="btn-fill" href="#work" onClick={function (event) { event.preventDefault(); go("work"); }}>
+                            View Projects <span>→</span>
+                        </a>
+                        <a className="btn-line" href="#contact" onClick={function (event) { event.preventDefault(); go("contact"); }}>Get in Touch</a>
+                    </div>
+                    <div className="hero-braces" aria-hidden="true">{"{ }"}</div>
+                    <div className="hero-bars" aria-hidden="true"><i /><i /><i /></div>
+                    <div className="hero-dots" aria-hidden="true"><i /><i /><i /><i /></div>
+                    <aside className="mantra">
+                        <span aria-hidden="true">&ldquo;</span>
+                        <p>From architecture to deployment, ready for production.</p>
+                        <div><i />Focus</div>
+                    </aside>
+                    <p className="hero-roles" aria-hidden="true">
+                        <span>{"// full-stack"}</span>
+                        <span>{"// AI"}</span>
+                        <span>{"// web3"}</span>
+                    </p>
+                </section>
 
-                        <h1 className="site-name">Meghsham Jade</h1>
-                        <h2 className="site-role">
-                            <Typewriter />
-                        </h2>
-                        <p className="site-bio">
-                            Dedicated and efficient developer with expertise in the MERN stack, Next.js, and an emerging specialization in blockchain development using ICP. Eager to expand into cutting-edge development practices.
-                        </p>
-
-                        <div className="site-pills">
-                            {TECH_PILLS.map(function (pill) {
-                                return (
-                                    <span className="site-pill" key={pill}>{pill}</span>
-                                );
-                            })}
-                        </div>
-
-                        <div className="site-profile-foot">
-                            <div className="site-meta-grid">
-                                <div>
-                                    <p className="site-meta-label">Education</p>
-                                    <p className="site-meta-value">
-                                        B.E. E&TC (2021–2026)
-                                        <span>JSPM BSIOTR / SPPU</span>
+                <section className="block" id="about">
+                    <SectionLabel>about</SectionLabel>
+                    <div className="about-grid">
+                        <Reveal>
+                            <IdentityCard onConnect={function () { go("contact"); }} />
+                        </Reveal>
+                        <div className="about-copy">
+                            <Reveal>
+                                <h2>A developer who <span>ships production work</span></h2>
+                            </Reveal>
+                            <Reveal delay={80}>
+                                <div className="about-lead">
+                                    <p>
+                                        Full-Stack Developer with 2+ years building scalable web applications and <strong>AI-powered solutions</strong>. Proficient in the MERN stack, Next.js, React, and Node.js, with hands-on work in RAG, LangChain, vector embeddings, multi-tenant SaaS, and third-party APIs including Meta Business. I take products from architecture to deployment: features, performance, testing, and bug fixes, through to production.
                                     </p>
                                 </div>
-                                <div>
-                                    <p className="site-meta-label">Location</p>
-                                    <p className="site-meta-value">Pune, Maharashtra</p>
+                            </Reveal>
+                            <Reveal delay={140}>
+                                <blockquote>
+                                    Production-ready applications with clean architecture, real-time capabilities, and AI integration.
+                                </blockquote>
+                            </Reveal>
+                            <Reveal delay={180}>
+                                <div className="interests">
+                                    <h3>Interests</h3>
+                                    <ul>
+                                        {INTERESTS.map(function (item) {
+                                            return <li key={item}>{item}</li>;
+                                        })}
+                                    </ul>
+                                    <h3>Languages</h3>
+                                    <ul>
+                                        {LANGUAGES.map(function (item) {
+                                            return <li key={item}>{item}</li>;
+                                        })}
+                                    </ul>
                                 </div>
-                            </div>
-
-                            <div className="site-socials">
-                                <a className="interactive" href="https://github.com/Meghsham15" target="_blank" rel="noopener noreferrer">GitHub</a>
-                                <a className="interactive" href="https://www.linkedin.com/in/meghsham-jade-2a3406218/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                            </div>
-
-                            <div className="site-actions">
-                                <a className="site-mail interactive is-magnetic" href="mailto:meghshamjade.contact@gmail.com">
-                                    meghshamjade.contact@gmail.com
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </a>
-                                <div className="site-btn-row">
-                                    <button type="button" className="site-ghost interactive is-magnetic" onClick={openResume}>
-                                        View resume
-                                    </button>
-                                    <button type="button" className="site-ask interactive is-magnetic" onClick={function () { setChatOpen(true); }}>
-                                        Ask AI
-                                    </button>
-                                </div>
-                                <a className="site-phone interactive" href="tel:+919325366493">+91 9325366493</a>
-                            </div>
+                            </Reveal>
+                            <Reveal delay={220}>
+                                <button type="button" className="btn-line btn-wide" onClick={openResume}>
+                                    View Full Resume <span>→</span>
+                                </button>
+                            </Reveal>
                         </div>
-                    </GlassPanel>
-                </aside>
+                    </div>
+                </section>
 
-                <main className="site-main">
-                    <GlassPanel className="site-block">
-                        <h2 className="site-heading">Professional Experience</h2>
-                        <div className="site-job">
-                            <div className="site-job-dot is-now" />
-                            <h4>Full Stack Developer</h4>
-                            <p className="site-job-meta site-mono is-now">Suscin Innovation Labs | Jul 2024 - Present</p>
-                            <p>Developing end-to-end web applications, implementing modern web technologies, and contributing to frontend and backend development using MERN stack technologies.</p>
-                        </div>
-                        <div className="site-job">
-                            <div className="site-job-dot" />
-                            <h4>JavaScript Developer Intern</h4>
-                            <p className="site-job-meta site-mono">Shunyadotek Company | Nov 2022 - Apr 2023</p>
-                            <p>Developed web applications using core JavaScript frameworks, collaborated with senior developers on client projects, and enhanced debugging and testing skills.</p>
-                        </div>
-                    </GlassPanel>
-
-                    <h2 className="site-heading is-loose">Selected Projects</h2>
-
-                    <div className="site-stack-pin">
-                        {FEATURED.map(function (item, index) {
-                            const live = typeof item.id === "number" ? projectById(item.id) : null;
+                <section className="block" id="stack">
+                    <SectionLabel>stack</SectionLabel>
+                    <div className="stack-head">
+                        <Reveal>
+                            <div>
+                                <h2>My Tech Stack</h2>
+                                <p>JavaScript, Python, React, Next.js, and Node.js, plus the AI and delivery tools behind production work.</p>
+                            </div>
+                        </Reveal>
+                        <Reveal delay={80}>
+                            <aside className="stack-note">
+                                <p>&quot;Clean architecture. Real-time when it matters. AI when the product needs it.&quot;</p>
+                                <span>~ how I build</span>
+                            </aside>
+                        </Reveal>
+                    </div>
+                    <div className="stack-filters" role="tablist" aria-label="Stack filter">
+                        {STACK_FILTERS.map(function (name) {
                             return (
-                                <div className="site-stack" data-stack={index + 1} key={item.title}>
-                                    <div className="site-stack-card">
-                                        <GlassPanel tilt>
-                                            <div className="site-project-top">
-                                                <h3>{item.title}</h3>
-                                                <div className={"site-project-icon " + item.accent}>
-                                                    <ProjectIcon type={item.icon} />
-                                                </div>
-                                            </div>
-                                            {live && live.img ? (
-                                                <img className="site-project-media" src={live.img} alt={item.title + " screenshot"} />
-                                            ) : null}
-                                            <p className="site-project-copy">{item.copy}</p>
-                                            <div className="site-tags">
-                                                {item.tags.map(function (tag) {
-                                                    return (
-                                                        <span className="site-tag site-mono" key={tag}>{tag}</span>
-                                                    );
-                                                })}
-                                            </div>
-                                            {live && live.link ? (
-                                                <a className="site-project-link interactive" href={live.link} target="_blank" rel="noopener noreferrer">
-                                                    Open project
-                                                </a>
-                                            ) : null}
-                                        </GlassPanel>
-                                    </div>
+                                <button key={name} type="button" role="tab" aria-selected={filter === name} className={filter === name ? "is-on" : ""} onClick={function () { setFilter(name); }}>
+                                    {name}
+                                </button>
+                            );
+                        })}
+                    </div>
+                    <div className="stack-groups" key={filter}>
+                        {stackGroups.map(function (group) {
+                            return (
+                                <div key={group}>
+                                    <h3>{group}</h3>
+                                    <ul>
+                                        {STACK[group].map(function (name, index) {
+                                            return <li key={name} style={{ animationDelay: (index * 45) + "ms" }}>{name}</li>;
+                                        })}
+                                    </ul>
                                 </div>
                             );
                         })}
                     </div>
+                    <p className="stack-also">
+                        <span>Also comfortable with</span>
+                        {ALSO.map(function (name) {
+                            return <em key={name}>{name}</em>;
+                        })}
+                    </p>
+                </section>
 
-                    <GlassPanel className="site-block">
-                        <h2 className="site-heading">Technical skills</h2>
-                        <div className="site-skill-grid">
-                            {skills.map(function (skill) {
-                                return (
-                                    <div className="site-skill" key={skill.id} data-percent={skill.percent}>
-                                        <img src={skill.img} alt={skill.name} />
-                                        <span className="site-skill-name">{skill.name}</span>
-                                        <span className="site-skill-pct site-mono">0%</span>
-                                        <div className="site-bar">
-                                            <span style={{ "--bar": skill.percent + "%" }} />
-                                        </div>
-                                    </div>
-                                );
-                            })}
+                <section className="block" id="work">
+                    <SectionLabel>work</SectionLabel>
+                    <Reveal>
+                        <div className="block-intro">
+                            <h2>Things I&apos;ve Built</h2>
+                            <p>Real-time applications, RAG systems, and Web3, taken from architecture to deployment.</p>
                         </div>
-                    </GlassPanel>
-
-                    <GlassPanel className="site-block">
-                        <h2 className="site-heading">How I work</h2>
-                        <div className="site-strengths">
-                            {devSkills.map(function (item) {
-                                return (
-                                    <span className="site-strength" key={item.id}>
-                                        <img src={item.img} alt="" />
-                                        {item.label}
-                                    </span>
-                                );
-                            })}
-                        </div>
-                    </GlassPanel>
-
-                    <GlassPanel className="site-block">
-                        <h2 className="site-heading">More work</h2>
-                        <div className="site-more">
-                            {moreWork.map(function (item) {
-                                return (
-                                    <a className="interactive" key={item.id} href={item.link} target="_blank" rel="noopener noreferrer">
-                                        {item.img ? <img src={item.img} alt={item.name + " screenshot"} /> : null}
-                                        <h4>{item.name}</h4>
-                                        <p>{item.des}</p>
+                    </Reveal>
+                    <div className="case-grid">
+                        {FEATURED.map(function (item) {
+                            return (
+                                <ProjectCard
+                                    key={item.id}
+                                    item={item}
+                                    onAsk={function () { setChatOpen(true); }}
+                                />
+                            );
+                        })}
+                    </div>
+                    <ul className="also">
+                        {moreWork.map(function (item) {
+                            return (
+                                <li key={item.id}>
+                                    <a href={item.link} target="_blank" rel="noopener noreferrer">
+                                        <strong>{item.name}</strong>
+                                        <span>{item.des}</span>
                                     </a>
-                                );
-                            })}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                    <p className="more-link">
+                        <a href="https://github.com/Meghsham15" target="_blank" rel="noopener noreferrer">View all projects on GitHub</a>
+                    </p>
+                </section>
+
+                <section className="block" id="jobs">
+                    <SectionLabel>jobs</SectionLabel>
+                    <Reveal>
+                        <div className="block-intro">
+                            <h2>Where I&apos;ve Worked</h2>
+                            <p>End-to-end delivery: features, performance, testing, bug fixes, and deployment.</p>
                         </div>
-                    </GlassPanel>
-                </main>
-            </div>
+                    </Reveal>
+                    <ul className="case-grid">
+                        {JOBS.map(function (job) {
+                            return (
+                                <li key={job.role}>
+                                    <JobCard job={job} />
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </section>
+
+                <section className="block" id="contact">
+                    <SectionLabel>contact</SectionLabel>
+                    <Reveal>
+                        <div className="block-intro">
+                            <h2>Let&apos;s work together</h2>
+                            <p className="contact-lead">Pune, Maharashtra. Open to full-stack and AI roles. Email, call, or ask the bot on this page. I usually reply within a day.</p>
+                        </div>
+                    </Reveal>
+                    <div className="contact-rows">
+                        <a href="https://github.com/Meghsham15" target="_blank" rel="noopener noreferrer">
+                            <strong>GitHub</strong>
+                            <span>github.com/Meghsham15</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/meghsham-jade-2a3406218/" target="_blank" rel="noopener noreferrer">
+                            <strong>LinkedIn</strong>
+                            <span>linkedin.com/in/meghsham-jade-2a3406218</span>
+                        </a>
+                        <a href="mailto:meghshamjade.contact@gmail.com">
+                            <strong>Email</strong>
+                            <span>meghshamjade.contact@gmail.com</span>
+                        </a>
+                        <a href="tel:+919325366493">
+                            <strong>Phone</strong>
+                            <span>+91 9325366493</span>
+                        </a>
+                    </div>
+                    <div className="form-actions">
+                        <button type="button" className="btn-line" onClick={openResume}>Resume</button>
+                        <button type="button" className="btn-line" onClick={function () { setChatOpen(true); }}>Ask</button>
+                    </div>
+                </section>
+            </main>
+
+            <footer className="foot">
+                <div className="foot-rule" />
+                <p>Full Stack AI Developer. Scalable web apps, RAG, and production delivery.</p>
+                <p className="foot-made">Grow everyday with Meghsham</p>
+                <p className="foot-links">
+                    <a href="https://github.com/Meghsham15" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://www.linkedin.com/in/meghsham-jade-2a3406218/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <button type="button" onClick={function () { window.scrollTo({ top: 0, behavior: "smooth" }); }}>Scroll to top</button>
+                </p>
+                <p className="foot-copy">© {new Date().getFullYear()} · All rights reserved</p>
+            </footer>
 
             {chatOpen ? (
                 <div
@@ -373,6 +640,53 @@ function Container() {
                 </div>
             ) : null}
         </>
+    );
+}
+
+function JobCard({ job }) {
+    const [open, setOpen] = useState(false);
+    const shown = open ? job.tags : job.tags.slice(0, 4);
+    const extra = job.tags.length - 4;
+
+    return (
+        <article className="case">
+            <div className="case-still is-empty">
+                <span>{job.place.split(",")[0]}</span>
+                <i className="case-shade" />
+                <i className="case-shine" />
+                <div className="case-caption">
+                    <h3>{job.role}</h3>
+                    <p>{job.when}</p>
+                </div>
+            </div>
+            <div className="case-body">
+                <p className="job-place">{job.place}</p>
+                <p>{job.copy}</p>
+                <ul>
+                    {job.bullets.map(function (line) {
+                        return <li key={line}>{line}</li>;
+                    })}
+                </ul>
+                {job.skills ? (
+                    <div className="job-skills">
+                        {job.skills.map(function (skill) {
+                            return <span key={skill}>{skill}</span>;
+                        })}
+                    </div>
+                ) : (
+                    <div className="case-tags">
+                        {shown.map(function (tag) {
+                            return <span key={tag}>{tag}</span>;
+                        })}
+                        {extra > 0 ? (
+                            <button type="button" onClick={function () { setOpen(function (value) { return !value; }); }}>
+                                {open ? "− less" : "+" + extra}
+                            </button>
+                        ) : null}
+                    </div>
+                )}
+            </div>
+        </article>
     );
 }
 

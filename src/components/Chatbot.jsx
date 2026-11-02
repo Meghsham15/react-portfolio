@@ -24,7 +24,7 @@ function Chatbot({ onClose }) {
     const [messages, setMessages] = useState([
         {
             role: "bot",
-            text: "Hi, I can answer questions about Meghsham's resume, skills, and projects."
+            text: "Hi, I can answer questions about Meghsham, a Full Stack AI Developer working with MERN, Next.js, RAG, and production projects."
         }
     ]);
     const [input, setInput] = useState("");

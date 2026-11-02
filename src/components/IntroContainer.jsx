@@ -26,7 +26,7 @@ function IntroContainer({ classes }) {
     const isMobile = useMaxWidth(900);
     let fullStack = "Full-Stack".split("");
     let webDeveloper = "Web-Developer".split("");
-    let intro = "Full Stack Developer at Suscin Innovation Labs in Pune, building end-to-end web applications with JavaScript, React, Next.js, Node.js, and MongoDB. I also work with Python, REST APIs, and ICP blockchain, after a JavaScript internship at Shunyadotek and while completing a B.E. in Electronics and Telecommunication at JSPM BSIOTR.";
+    let intro = "Dedicated Full Stack AI Developer with 2+ years building scalable web applications and AI-powered solutions. Proficient in JavaScript, Python, React, Next.js, and Node.js, with RAG, LangChain, vector embeddings, multi-tenant SaaS, Meta Business APIs, real-time apps, and Web3 on the Internet Computer.";
     // console.log(intro);
 
 

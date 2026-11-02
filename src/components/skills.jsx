@@ -25,9 +25,9 @@ const skills = [
     },
     {
         id: "fadeRight2",
-        img: Images.icp,
-        name: "ICP Blockchain",
-        percent: 40
+        img: chatgptIcon,
+        name: "RAG / LangChain",
+        percent: 85
     },
     {
         id: "fadeUp2",
@@ -56,8 +56,8 @@ const skills = [
     {
         id: "fadeLeft3",
         img: chatgptIcon,
-        name: "AI Integration",
-        percent: 90
+        name: "API Integrations",
+        percent: 85
     },
 ];
 

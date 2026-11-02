@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-
-const LINES = ["Opening the studio", "Tuning the glass", "Arranging the work"];
+import Images from "./Images";
 
 function reducedMotion() {
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 function BootLoader({ ready, onReveal, onDone }) {
-    const [phase, setPhase] = useState("loading");
-    const [progress, setProgress] = useState(6);
-    const [line, setLine] = useState(0);
-    const startedAt = useRef(performance.now());
+    const [percent, setPercent] = useState(0);
+    const [phase, setPhase] = useState("count");
+    const [welcome, setWelcome] = useState(false);
     const onRevealRef = useRef(onReveal);
     const onDoneRef = useRef(onDone);
+    const revealed = useRef(false);
+    const skipped = useRef(false);
     onRevealRef.current = onReveal;
     onDoneRef.current = onDone;
 
@@ -24,122 +24,118 @@ function BootLoader({ ready, onReveal, onDone }) {
     }, []);
 
     useEffect(function () {
-        if (phase !== "loading") {
-            return undefined;
-        }
-        let frame = 0;
-        function tick(now) {
-            const elapsed = now - startedAt.current;
-            const crept = 1 - Math.exp(-elapsed / 980);
-            setProgress(6 + crept * 86);
-            frame = requestAnimationFrame(tick);
-        }
-        frame = requestAnimationFrame(tick);
-        return function () {
-            cancelAnimationFrame(frame);
-        };
-    }, [phase]);
-
-    useEffect(function () {
-        if (phase !== "loading") {
+        if (phase !== "count" || reducedMotion()) {
             return undefined;
         }
         const id = setInterval(function () {
-            setLine(function (current) {
-                return (current + 1) % LINES.length;
+            setPercent(function (value) {
+                return value >= 100 ? 100 : value + 1;
             });
-        }, 1100);
+        }, 22);
         return function () {
             clearInterval(id);
         };
     }, [phase]);
 
     useEffect(function () {
-        if (!ready || phase !== "loading") {
+        if (phase !== "count") {
             return undefined;
         }
-        const minimum = reducedMotion() ? 240 : 1500;
-        const wait = Math.max(0, minimum - (performance.now() - startedAt.current));
+        if (reducedMotion() && ready) {
+            setPercent(100);
+            setWelcome(true);
+            setPhase("mark");
+            return undefined;
+        }
+        if (skipped.current && ready) {
+            setPhase("exit");
+            return undefined;
+        }
+        if (percent < 100 || !ready) {
+            return undefined;
+        }
         const id = setTimeout(function () {
-            setPhase("finishing");
-        }, wait);
+            setPhase("mark");
+        }, 260);
         return function () {
             clearTimeout(id);
         };
-    }, [ready, phase]);
+    }, [percent, ready, phase]);
 
     useEffect(function () {
-        if (phase !== "finishing") {
+        if (phase !== "mark") {
             return undefined;
         }
-        const hold = reducedMotion() ? 40 : 420;
-        const id = setTimeout(function () {
+        if (reducedMotion()) {
+            const id = setTimeout(function () {
+                setPhase("exit");
+            }, 700);
+            return function () {
+                clearTimeout(id);
+            };
+        }
+        const showWelcome = setTimeout(function () {
+            setWelcome(true);
+        }, 2000);
+        const leave = setTimeout(function () {
+            setPhase("sweep");
+        }, 3600);
+        return function () {
+            clearTimeout(showWelcome);
+            clearTimeout(leave);
+        };
+    }, [phase]);
+
+    useEffect(function () {
+        if (phase !== "sweep" && phase !== "exit") {
+            return undefined;
+        }
+        if (!revealed.current) {
+            revealed.current = true;
             onRevealRef.current();
-            setPhase("exiting");
-        }, hold);
+        }
+        if (phase !== "sweep") {
+            return undefined;
+        }
+        const id = setTimeout(function () {
+            setPhase("exit");
+        }, reducedMotion() ? 40 : 1280);
         return function () {
             clearTimeout(id);
         };
     }, [phase]);
 
     useEffect(function () {
-        if (phase !== "exiting") {
+        if (phase !== "exit") {
             return undefined;
         }
-        const exitMs = reducedMotion() ? 220 : 920;
         const id = setTimeout(function () {
             onDoneRef.current();
-        }, exitMs);
+        }, reducedMotion() ? 40 : 460);
         return function () {
             clearTimeout(id);
         };
     }, [phase]);
 
-    const shown = phase === "loading" ? progress : 100;
-    const phrase = phase === "loading" ? LINES[line] : "Welcome";
-    const count = String(Math.min(100, Math.round(shown))).padStart(2, "0");
+    function skip() {
+        skipped.current = true;
+        if (ready) {
+            setPhase("exit");
+        }
+    }
 
     return (
-        <div className={"boot" + (phase === "exiting" ? " is-exiting" : "")} aria-hidden={phase === "exiting"}>
-            <div className="boot-mesh" aria-hidden="true">
-                <span className="boot-orb boot-orb-a" />
-                <span className="boot-orb boot-orb-b" />
-            </div>
-            <div className="boot-grain" aria-hidden="true" />
-            <div className="boot-frame" aria-hidden="true" />
-
-            <div className="boot-top">
-                <span>MJ / Studio</span>
-                <span className="boot-count">{count}</span>
-            </div>
-
+        <div className={"boot" + (phase === "mark" ? " is-mark" : "") + (phase === "sweep" ? " is-sweep" : "") + (phase === "exit" ? " is-exiting" : "")} aria-hidden={phase === "exit"}>
             <div className="boot-stage">
-                <div className="boot-mark" aria-hidden="true">
-                    <span className="boot-glow" />
-                    <svg className="boot-ring" viewBox="0 0 140 140">
-                        <defs>
-                            <linearGradient id="boot-ring-grad" x1="0" y1="0" x2="1" y2="1">
-                                <stop offset="0%" stopColor="#00f0ff" />
-                                <stop offset="100%" stopColor="#7000ff" />
-                            </linearGradient>
-                        </defs>
-                        <circle className="boot-ring-track" cx="70" cy="70" r="62" />
-                        <circle className="boot-ring-arc" cx="70" cy="70" r="62" />
-                    </svg>
-                    <div className="boot-disc">MJ</div>
-                </div>
-                <p className="boot-kicker">Portfolio</p>
-                <h1 className="boot-name">Meghsham Jade</h1>
-                <p className="boot-role">Full Stack AI Developer</p>
-                <div className="boot-meter" aria-hidden="true">
-                    <span style={{ width: shown + "%" }} />
-                </div>
+                <span className="boot-line" style={{ width: percent + "%" }} />
+                <span className="boot-follow" />
+                <p className="boot-pct">{percent}%</p>
             </div>
-
-            <div className="boot-foot">
-                <span>Pune, India</span>
-                <span className="boot-live" role="status">{phrase}</span>
+            <div className="boot-mark">
+                <img className="boot-mark-logo" src={Images.mjLogo} alt="" />
+                <p className={"boot-welcome" + (welcome ? " is-on" : "")}>Welcome</p>
             </div>
+            <button type="button" className="boot-skip" onClick={skip}>Skip Intro</button>
         </div>
     );
 }

@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 
-const PHRASES = ["Full-Stack Engineer", "Backend Architect", "AI Integrator"];
+const PHRASES = [
+    "Building scalable web apps.",
+    "Shipping AI-powered work.",
+    "MERN, Next.js, and RAG.",
+    "Real-time and Web3."
+];
 
 function Typewriter() {
     const [text, setText] = useState(PHRASES[0]);
